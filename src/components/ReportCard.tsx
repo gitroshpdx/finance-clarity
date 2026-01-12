@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Clock, TrendingUp, Globe, DollarSign, Zap, BarChart3 } from 'lucide-react';
 
 interface ReportCardProps {
+  slug: string;
   title: string;
   teaser: string;
   readTime: number;
@@ -28,22 +30,23 @@ const topicColors: Record<string, string> = {
   'Tech & Innovation': 'from-purple-500/20 to-pink-500/20',
 };
 
-const ReportCard = ({ title, teaser, readTime, topic, publishedAt, index = 0 }: ReportCardProps) => {
+const ReportCard = ({ slug, title, teaser, readTime, topic, publishedAt, index = 0 }: ReportCardProps) => {
   const Icon = topicIcons[topic] || TrendingUp;
   const gradientClass = topicColors[topic] || 'from-primary/20 to-primary-glow/20';
 
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: 0.5,
-        delay: index * 0.1,
-        ease: [0.16, 1, 0.3, 1],
-      }}
-      whileHover={{ y: -8 }}
-      className="group cursor-pointer"
-    >
+    <Link to={`/report/${slug}`}>
+      <motion.article
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.5,
+          delay: index * 0.1,
+          ease: [0.16, 1, 0.3, 1],
+        }}
+        whileHover={{ y: -8 }}
+        className="group cursor-pointer"
+      >
       <div className="glass-card rounded-2xl overflow-hidden transition-all duration-500 group-hover:shadow-card-hover group-hover:border-primary/20">
         {/* Thumbnail / Visual */}
         <div className={`relative h-48 bg-gradient-to-br ${gradientClass} overflow-hidden`}>
@@ -107,7 +110,8 @@ const ReportCard = ({ title, teaser, readTime, topic, publishedAt, index = 0 }: 
           </div>
         </div>
       </div>
-    </motion.article>
+      </motion.article>
+    </Link>
   );
 };
 

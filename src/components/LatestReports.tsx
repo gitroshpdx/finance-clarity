@@ -1,51 +1,6 @@
 import { motion } from 'framer-motion';
 import ReportCard from './ReportCard';
-
-// Mock data for reports
-const mockReports = [
-  {
-    title: "Fed's Next Move: Reading Between the Lines of Powell's Latest Remarks",
-    teaser: "The Federal Reserve's communication strategy reveals more than monetary policy—it signals a profound shift in how central banks manage market expectations in an era of unprecedented uncertainty.",
-    readTime: 5,
-    topic: "Macroeconomics",
-    publishedAt: "2h ago",
-  },
-  {
-    title: "The Great Rotation: Why Institutional Money Is Flowing to Emerging Markets",
-    teaser: "A seismic shift in global capital allocation is underway. Here's what's driving the biggest portfolio rebalancing since 2008.",
-    readTime: 4,
-    topic: "Markets",
-    publishedAt: "5h ago",
-  },
-  {
-    title: "Energy Transition Paradox: Oil Majors' $500B Bet on Both Sides",
-    teaser: "The world's largest energy companies are playing a complex game of hedging their bets while reshaping the future of global energy infrastructure.",
-    readTime: 6,
-    topic: "Energy & Commodities",
-    publishedAt: "8h ago",
-  },
-  {
-    title: "Dollar Dynamics: Why Currency Markets Are Ignoring the Deficit",
-    teaser: "Traditional models predicted dollar weakness years ago. Understanding why they failed reveals deeper truths about modern monetary mechanics.",
-    readTime: 5,
-    topic: "Currencies",
-    publishedAt: "12h ago",
-  },
-  {
-    title: "AI's Real Economic Impact: Beyond the Hype Cycle",
-    teaser: "Separating genuine productivity gains from speculative excess. A framework for understanding AI's macroeconomic implications over the next decade.",
-    readTime: 7,
-    topic: "Tech & Innovation",
-    publishedAt: "1d ago",
-  },
-  {
-    title: "The New Cold War Economics: Trade Blocs and Supply Chain Realignment",
-    teaser: "Geopolitical fractures are redrawing the map of global commerce. Winners and losers are emerging from this historic restructuring.",
-    readTime: 6,
-    topic: "Geopolitics",
-    publishedAt: "1d ago",
-  },
-];
+import { mockReports } from '@/data/mockReports';
 
 const LatestReports = () => {
   return (
@@ -70,8 +25,13 @@ const LatestReports = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {mockReports.map((report, index) => (
             <ReportCard
-              key={index}
-              {...report}
+              key={report.id}
+              slug={report.slug}
+              title={report.title}
+              teaser={report.teaser}
+              readTime={report.readTime}
+              topic={report.topic}
+              publishedAt={report.publishedAt}
               index={index}
             />
           ))}
