@@ -1,23 +1,14 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-
-const topics = [
-  'Macroeconomics',
-  'Markets',
-  'Geopolitics',
-  'Currencies',
-  'Energy & Commodities',
-  'Tech & Innovation',
-];
+import { Link } from 'react-router-dom';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isTopicsOpen, setIsTopicsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -76,40 +67,6 @@ const Navigation = () => {
                 Reports
               </a>
               
-              {/* Topics Dropdown */}
-              <div
-                className="relative"
-                onMouseEnter={() => setIsTopicsOpen(true)}
-                onMouseLeave={() => setIsTopicsOpen(false)}
-              >
-                <button className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-                  Topics
-                  <ChevronDown className={`w-4 h-4 transition-transform ${isTopicsOpen ? 'rotate-180' : ''}`} />
-                </button>
-                
-                <AnimatePresence>
-                  {isTopicsOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute top-full left-0 mt-2 w-56 glass-card rounded-xl p-2"
-                    >
-                      {topics.map((topic) => (
-                        <a
-                          key={topic}
-                          href={`#${topic.toLowerCase().replace(/\s+/g, '-')}`}
-                          className="block px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-primary/10 rounded-lg transition-colors"
-                        >
-                          {topic}
-                        </a>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-              
               <a
                 href="#about"
                 className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
@@ -163,20 +120,6 @@ const Navigation = () => {
                 >
                   Reports
                 </a>
-                
-                <div className="space-y-3">
-                  <span className="text-sm text-muted-foreground uppercase tracking-wider">Topics</span>
-                  {topics.map((topic) => (
-                    <a
-                      key={topic}
-                      href={`#${topic.toLowerCase().replace(/\s+/g, '-')}`}
-                      className="block text-muted-foreground hover:text-foreground transition-colors"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      {topic}
-                    </a>
-                  ))}
-                </div>
                 
                 <a
                   href="#about"

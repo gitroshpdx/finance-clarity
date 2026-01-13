@@ -23,19 +23,9 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
+import { useCategories } from '@/hooks/useCategories';
 import { ArrowLeft, Loader2, Save, ClipboardPaste, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
-const CATEGORIES = [
-  'Markets',
-  'Economy',
-  'Technology',
-  'Central Banks',
-  'Commodities',
-  'Geopolitics',
-  'Real Estate',
-  'Crypto',
-];
 
 const COMMON_TAGS = [
   'Federal Reserve',
@@ -71,6 +61,7 @@ export default function CreateReport() {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { user } = useAuth();
+  const { data: categories, isLoading: categoriesLoading } = useCategories();
 
   const generateSlug = (title: string) => {
     return title
@@ -330,9 +321,9 @@ Just paste and click 'Parse with AI'!"
                     <SelectValue placeholder="Select category" />
                   </SelectTrigger>
                   <SelectContent>
-                    {CATEGORIES.map((cat) => (
-                      <SelectItem key={cat} value={cat}>
-                        {cat}
+                    {categories?.map((cat) => (
+                      <SelectItem key={cat.id} value={cat.name}>
+                        {cat.name}
                       </SelectItem>
                     ))}
                   </SelectContent>

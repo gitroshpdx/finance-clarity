@@ -14,18 +14,8 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
+import { useCategories } from '@/hooks/useCategories';
 import { ArrowLeft, Loader2, Save, Eye } from 'lucide-react';
-
-const CATEGORIES = [
-  'Markets',
-  'Economy',
-  'Technology',
-  'Central Banks',
-  'Commodities',
-  'Geopolitics',
-  'Real Estate',
-  'Crypto',
-];
 
 export default function EditReport() {
   const { id } = useParams<{ id: string }>();
@@ -40,6 +30,7 @@ export default function EditReport() {
   const [body, setBody] = useState('');
   const [status, setStatus] = useState<'draft' | 'published'>('draft');
   const [saving, setSaving] = useState(false);
+  const { data: categories } = useCategories();
 
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -224,9 +215,9 @@ export default function EditReport() {
                     <SelectValue placeholder="Select category" />
                   </SelectTrigger>
                   <SelectContent>
-                    {CATEGORIES.map((cat) => (
-                      <SelectItem key={cat} value={cat}>
-                        {cat}
+                    {categories?.map((cat) => (
+                      <SelectItem key={cat.id} value={cat.name}>
+                        {cat.name}
                       </SelectItem>
                     ))}
                   </SelectContent>
