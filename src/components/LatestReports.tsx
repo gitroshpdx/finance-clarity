@@ -1,8 +1,11 @@
 import { motion } from 'framer-motion';
 import ReportCard from './ReportCard';
-import { mockReports } from '@/data/mockReports';
+import { usePublishedReports } from '@/hooks/useReports';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const LatestReports = () => {
+  const { data: reports, isLoading } = usePublishedReports(6);
+
   return (
     <section id="reports" className="relative py-24 md:py-32">
       <div className="container px-6">
@@ -21,41 +24,55 @@ const LatestReports = () => {
           </p>
         </motion.div>
 
-        {/* Reports Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {mockReports.map((report, index) => (
-            <ReportCard
-              key={report.id}
-              slug={report.slug}
-              title={report.title}
-              teaser={report.teaser}
-              readTime={report.readTime}
-              topic={report.topic}
-              publishedAt={report.publishedAt}
-              index={index}
-            />
-          ))}
-        </div>
+        {/* Loading State */}
+        {isLoading && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="glass-card rounded-2xl p-6">
+                <Skeleton className="h-4 w-20 mb-4" />
+                <Skeleton className="h-6 w-full mb-2" />
+                <Skeleton className="h-6 w-3/4 mb-4" />
+                <Skeleton className="h-4 w-full mb-2" />
+                <Skeleton className="h-4 w-2/3 mb-6" />
+                <div className="flex justify-between">
+                  <Skeleton className="h-4 w-24" />
+                  <Skeleton className="h-4 w-20" />
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
 
-        {/* Load More */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-          className="flex justify-center mt-16"
-        >
-          <button className="group flex items-center gap-2 px-6 py-3 rounded-full glass-card text-muted-foreground hover:text-foreground transition-colors">
-            <span className="font-medium">Load more reports</span>
-            <motion.div
-              animate={{ y: [0, 4, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="w-5 h-5"
-            >
-              ↓
-            </motion.div>
-          </button>
-        </motion.div>
+        {/* Empty State */}
+        {!isLoading && (!reports || reports.length === 0) && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-16"
+          >
+            <p className="text-muted-foreground text-lg">
+              No published reports yet. Check back soon for fresh intelligence.
+            </p>
+          </motion.div>
+        )}
+
+        {/* Reports Grid */}
+        {!isLoading && reports && reports.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {reports.map((report, index) => (
+              <ReportCard
+                key={report.id}
+                slug={report.slug}
+                title={report.title}
+                teaser={report.excerpt || ''}
+                readTime={Math.ceil((report.word_count || 0) / 200)}
+                topic={report.category}
+                publishedAt={report.published_at || report.created_at}
+                index={index}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

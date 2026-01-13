@@ -1,15 +1,75 @@
 import { motion } from 'framer-motion';
-import type { ArticleSection } from '@/data/mockReports';
 import SectionDivider from './SectionDivider';
-import DataVisualization from './DataVisualization';
 
 interface ArticleContentProps {
-  sections: ArticleSection[];
+  body: string;
 }
 
-const ArticleContent = ({ sections }: ArticleContentProps) => {
+// Parse markdown-style headings and content
+function parseBodyContent(body: string) {
+  const lines = body.split('\n');
+  const sections: { id: string; title: string; content: string[] }[] = [];
+  let currentSection: { id: string; title: string; content: string[] } | null = null;
+  let introContent: string[] = [];
+
+  lines.forEach((line) => {
+    const headingMatch = line.match(/^##\s+(.+)$/);
+    
+    if (headingMatch) {
+      if (currentSection) {
+        sections.push(currentSection);
+      }
+      const title = headingMatch[1];
+      currentSection = {
+        id: title.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+        title,
+        content: [],
+      };
+    } else if (currentSection) {
+      if (line.trim()) {
+        currentSection.content.push(line);
+      }
+    } else {
+      // Content before any heading goes to intro
+      if (line.trim()) {
+        introContent.push(line);
+      }
+    }
+  });
+
+  if (currentSection) {
+    sections.push(currentSection);
+  }
+
+  return { introContent, sections };
+}
+
+const ArticleContent = ({ body }: ArticleContentProps) => {
+  const { introContent, sections } = parseBodyContent(body);
+
   return (
     <article className="max-w-3xl mx-auto px-6">
+      {/* Intro content (before any headings) */}
+      {introContent.length > 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="prose prose-lg max-w-none mb-12"
+        >
+          {introContent.map((paragraph, pIndex) => (
+            <p
+              key={pIndex}
+              className={`text-muted-foreground leading-[1.8] mb-6 ${pIndex === 0 ? 'drop-cap' : ''}`}
+            >
+              {paragraph}
+            </p>
+          ))}
+        </motion.div>
+      )}
+
+      {/* Sections with headings */}
       {sections.map((section, index) => (
         <motion.section
           key={section.id}
@@ -29,35 +89,39 @@ const ArticleContent = ({ sections }: ArticleContentProps) => {
           
           {/* Section Content */}
           <div className="prose prose-lg max-w-none">
-            {section.content.split('\n\n').map((paragraph, pIndex) => (
+            {section.content.map((paragraph, pIndex) => (
               <p
                 key={pIndex}
                 className={`text-muted-foreground leading-[1.8] mb-6 ${
-                  index === 0 && pIndex === 0 ? 'drop-cap' : ''
+                  index === 0 && pIndex === 0 && introContent.length === 0 ? 'drop-cap' : ''
                 }`}
               >
                 {paragraph}
               </p>
             ))}
           </div>
-          
-          {/* Pull Quote */}
-          {section.pullQuote && (
-            <motion.blockquote
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="pull-quote"
-            >
-              {section.pullQuote}
-            </motion.blockquote>
-          )}
-          
-          {/* Chart */}
-          {section.chart && <DataVisualization chart={section.chart} />}
         </motion.section>
       ))}
+
+      {/* If no sections, just render the body as paragraphs */}
+      {sections.length === 0 && introContent.length === 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="prose prose-lg max-w-none"
+        >
+          {body.split('\n\n').map((paragraph, pIndex) => (
+            <p
+              key={pIndex}
+              className={`text-muted-foreground leading-[1.8] mb-6 ${pIndex === 0 ? 'drop-cap' : ''}`}
+            >
+              {paragraph}
+            </p>
+          ))}
+        </motion.div>
+      )}
     </article>
   );
 };
