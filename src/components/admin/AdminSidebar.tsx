@@ -6,10 +6,8 @@ import {
   FileText,
   PenLine,
   Sparkles,
-  Settings,
   LogOut,
   TrendingUp,
-  ChevronLeft,
   Moon,
   Sun,
 } from 'lucide-react';
@@ -41,9 +39,6 @@ const createNavItems = [
   { title: 'AI Generate', url: '/admin/reports/ai', icon: Sparkles },
 ];
 
-const settingsNavItems = [
-  { title: 'Settings', url: '/admin/settings', icon: Settings },
-];
 
 export function AdminSidebar() {
   const { state } = useSidebar();
@@ -126,32 +121,6 @@ export function AdminSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {createNavItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton
-                    asChild
-                    isActive={isActive(item.url)}
-                    tooltip={collapsed ? item.title : undefined}
-                  >
-                    <NavLink
-                      to={item.url}
-                      className="flex items-center gap-3 hover:bg-sidebar-accent transition-colors"
-                      activeClassName="bg-sidebar-accent text-sidebar-primary font-medium"
-                    >
-                      <item.icon className="h-4 w-4 shrink-0" />
-                      {!collapsed && <span>{item.title}</span>}
-                    </NavLink>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
-        <SidebarGroup>
-          <SidebarGroupLabel className={collapsed ? 'sr-only' : ''}>System</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {settingsNavItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
                     asChild
