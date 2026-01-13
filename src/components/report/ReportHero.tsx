@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
 import { Clock, Calendar, User } from 'lucide-react';
-import type { Report } from '@/data/mockReports';
+import type { DatabaseReport } from '@/types/report';
+import { calculateReadTime, formatPublishedDate } from '@/types/report';
 
 interface ReportHeroProps {
-  report: Report;
+  report: DatabaseReport;
 }
 
 const topicGradients: Record<string, string> = {
@@ -13,10 +14,17 @@ const topicGradients: Record<string, string> = {
   'Currencies': 'from-green-500/30 via-emerald-500/20 to-transparent',
   'Energy & Commodities': 'from-yellow-500/30 via-orange-500/20 to-transparent',
   'Tech & Innovation': 'from-purple-500/30 via-pink-500/20 to-transparent',
+  'Economy': 'from-blue-500/30 via-indigo-500/20 to-transparent',
+  'Technology': 'from-purple-500/30 via-pink-500/20 to-transparent',
+  'Policy': 'from-amber-500/30 via-orange-500/20 to-transparent',
+  'Crypto': 'from-pink-500/30 via-rose-500/20 to-transparent',
+  'Energy': 'from-green-500/30 via-lime-500/20 to-transparent',
 };
 
 const ReportHero = ({ report }: ReportHeroProps) => {
-  const gradientClass = topicGradients[report.topic] || 'from-primary/30 via-primary-glow/20 to-transparent';
+  const gradientClass = topicGradients[report.category] || 'from-primary/30 via-primary-glow/20 to-transparent';
+  const readTime = calculateReadTime(report.word_count);
+  const publishedDate = formatPublishedDate(report.published_at);
 
   return (
     <header className="relative min-h-[60vh] flex items-end pb-16 overflow-hidden">
@@ -49,7 +57,7 @@ const ReportHero = ({ report }: ReportHeroProps) => {
           transition={{ duration: 0.5 }}
           className="inline-block px-4 py-1.5 text-sm font-medium rounded-full bg-primary/20 text-primary mb-6"
         >
-          {report.topic}
+          {report.category}
         </motion.span>
 
         {/* Title */}
@@ -62,15 +70,17 @@ const ReportHero = ({ report }: ReportHeroProps) => {
           {report.title}
         </motion.h1>
 
-        {/* Teaser */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-xl text-muted-foreground leading-relaxed mb-8 max-w-3xl"
-        >
-          {report.teaser}
-        </motion.p>
+        {/* Excerpt */}
+        {report.excerpt && (
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-xl text-muted-foreground leading-relaxed mb-8 max-w-3xl"
+          >
+            {report.excerpt}
+          </motion.p>
+        )}
 
         {/* Meta information */}
         <motion.div
@@ -79,24 +89,22 @@ const ReportHero = ({ report }: ReportHeroProps) => {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground"
         >
-          {report.author && (
-            <div className="flex items-center gap-2">
-              <User className="w-4 h-4 text-primary" />
-              <span className="font-medium text-foreground">{report.author.name}</span>
-              {report.author.title && (
-                <span className="hidden sm:inline">• {report.author.title}</span>
-              )}
-            </div>
-          )}
+          <div className="flex items-center gap-2">
+            <User className="w-4 h-4 text-primary" />
+            <span className="font-medium text-foreground">{report.author_name || 'Editorial Team'}</span>
+            {report.author_role && (
+              <span className="hidden sm:inline">• {report.author_role}</span>
+            )}
+          </div>
           
           <div className="flex items-center gap-2">
             <Clock className="w-4 h-4 text-primary" />
-            <span>{report.readTime} min read</span>
+            <span>{readTime}</span>
           </div>
           
           <div className="flex items-center gap-2">
             <Calendar className="w-4 h-4 text-primary" />
-            <span>{report.publishedAt}</span>
+            <span>{publishedDate}</span>
           </div>
         </motion.div>
       </div>

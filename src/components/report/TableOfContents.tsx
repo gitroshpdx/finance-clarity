@@ -1,17 +1,43 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { List, X } from 'lucide-react';
-import type { ArticleSection } from '@/data/mockReports';
 
-interface TableOfContentsProps {
-  sections: ArticleSection[];
+interface TOCItem {
+  id: string;
+  title: string;
 }
 
-const TableOfContents = ({ sections }: TableOfContentsProps) => {
+interface TableOfContentsProps {
+  body: string;
+}
+
+// Parse headings from markdown-style body
+function parseHeadings(body: string): TOCItem[] {
+  const lines = body.split('\n');
+  const headings: TOCItem[] = [];
+
+  lines.forEach((line) => {
+    const match = line.match(/^##\s+(.+)$/);
+    if (match) {
+      const title = match[1];
+      headings.push({
+        id: title.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+        title,
+      });
+    }
+  });
+
+  return headings;
+}
+
+const TableOfContents = ({ body }: TableOfContentsProps) => {
+  const sections = useMemo(() => parseHeadings(body), [body]);
   const [activeSection, setActiveSection] = useState<string>(sections[0]?.id || '');
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   useEffect(() => {
+    if (sections.length === 0) return;
+    
     const observers: IntersectionObserver[] = [];
     
     sections.forEach((section) => {
@@ -44,6 +70,8 @@ const TableOfContents = ({ sections }: TableOfContentsProps) => {
       setIsMobileOpen(false);
     }
   };
+
+  if (sections.length === 0) return null;
 
   const TOCContent = () => (
     <nav className="space-y-2">

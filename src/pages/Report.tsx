@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Loader2 } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import ScrollProgress from '@/components/report/ScrollProgress';
@@ -10,19 +10,27 @@ import ArticleContent from '@/components/report/ArticleContent';
 import TableOfContents from '@/components/report/TableOfContents';
 import ShareActions from '@/components/report/ShareActions';
 import RelatedReports from '@/components/report/RelatedReports';
-import { getReportBySlug } from '@/data/mockReports';
+import { useReportBySlug } from '@/hooks/useReports';
 
 const Report = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
-  const report = slug ? getReportBySlug(slug) : undefined;
+  const { data: report, isLoading, error } = useReportBySlug(slug);
 
   // Scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [slug]);
 
-  if (!report) {
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (error || !report) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
@@ -63,10 +71,10 @@ const Report = () => {
       {/* Main Content Area */}
       <div className="relative pb-32 lg:pb-20">
         {/* Table of Contents */}
-        <TableOfContents sections={report.content} />
+        <TableOfContents body={report.body} />
         
         {/* Article Content */}
-        <ArticleContent sections={report.content} />
+        <ArticleContent body={report.body} />
         
         {/* Share Actions */}
         <ShareActions title={report.title} />
@@ -74,7 +82,7 @@ const Report = () => {
 
       {/* Related Reports */}
       <RelatedReports 
-        reportIds={report.relatedReportIds} 
+        category={report.category} 
         currentReportId={report.id} 
       />
 

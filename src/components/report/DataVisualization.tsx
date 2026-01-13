@@ -12,7 +12,12 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
-import type { ChartData } from '@/data/mockReports';
+
+export interface ChartData {
+  type: 'line' | 'bar' | 'area';
+  title: string;
+  data: { date: string; value: number }[];
+}
 
 interface DataVisualizationProps {
   chart: ChartData;
