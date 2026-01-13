@@ -4,6 +4,7 @@ import { Menu, X, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useCategories } from '@/hooks/useCategories';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -119,6 +120,9 @@ const Navigation = () => {
               >
                 About
               </Link>
+              
+              {/* Theme Toggle */}
+              <ThemeToggle />
             </div>
 
             {/* CTA Button */}
@@ -209,6 +213,9 @@ const Navigation = () => {
                 >
                   About
                 </Link>
+                
+                {/* Mobile Theme Toggle */}
+                <ThemeToggle variant="mobile" />
                 
                 <Button
                   className="bg-gradient-primary text-primary-foreground w-full mt-4"

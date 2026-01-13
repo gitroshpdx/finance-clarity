@@ -141,10 +141,7 @@
     font-family: var(--font-sans);
   }
 
-  /* Default to dark mode */
-  html {
-    @apply dark;
-  }
+  /* Note: Dark mode is now handled by next-themes via ThemeProvider */
 
   /* Typography utilities */
   .font-serif {
@@ -256,6 +253,10 @@
     transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
+  .ease-smooth {
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
   /* Text balance for headlines */
   .text-balance {
     text-wrap: balance;
@@ -268,5 +269,63 @@
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+}
+
+/* Theme Transition Effects */
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition: 
+    background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    fill 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    stroke 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Radial wipe overlay for premium theme switch effect */
+.theme-wipe-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  background: radial-gradient(
+    circle at var(--wipe-x, 50%) var(--wipe-y, 50%),
+    var(--wipe-color) 0%,
+    transparent 0%
+  );
+  animation: theme-wipe 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes theme-wipe {
+  0% {
+    background: radial-gradient(
+      circle at var(--wipe-x, 50%) var(--wipe-y, 50%),
+      var(--wipe-color) 0%,
+      transparent 0%
+    );
+    opacity: 0.5;
+  }
+  50% {
+    background: radial-gradient(
+      circle at var(--wipe-x, 50%) var(--wipe-y, 50%),
+      var(--wipe-color) 50%,
+      transparent 70%
+    );
+    opacity: 0.3;
+  }
+  100% {
+    background: radial-gradient(
+      circle at var(--wipe-x, 50%) var(--wipe-y, 50%),
+      var(--wipe-color) 150%,
+      transparent 150%
+    );
+    opacity: 0;
   }
 }

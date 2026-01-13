@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import { NavLink } from '@/components/NavLink';
 import { useAuth } from '@/contexts/AuthContext';
+import { useTheme } from 'next-themes';
 import {
   LayoutDashboard,
   FileText,
@@ -29,7 +30,6 @@ import {
 } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { useState, useEffect } from 'react';
 
 const mainNavItems = [
   { title: 'Dashboard', url: '/admin', icon: LayoutDashboard },
@@ -49,21 +49,12 @@ export function AdminSidebar() {
   const collapsed = state === 'collapsed';
   const location = useLocation();
   const { signOut, user } = useAuth();
-  const [isDark, setIsDark] = useState(true);
+  const { theme, resolvedTheme, setTheme } = useTheme();
 
-  useEffect(() => {
-    const isDarkMode = document.documentElement.classList.contains('dark');
-    setIsDark(isDarkMode);
-  }, []);
+  const isDark = resolvedTheme === 'dark';
 
   const toggleTheme = () => {
-    const newIsDark = !isDark;
-    setIsDark(newIsDark);
-    if (newIsDark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    setTheme(isDark ? 'light' : 'dark');
   };
 
   const isActive = (path: string) => {
