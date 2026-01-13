@@ -10,6 +10,8 @@ import {
   TrendingUp,
   Moon,
   Sun,
+  FolderOpen,
+  BarChart3,
 } from 'lucide-react';
 import {
   Sidebar,
@@ -32,6 +34,8 @@ import { useState, useEffect } from 'react';
 const mainNavItems = [
   { title: 'Dashboard', url: '/admin', icon: LayoutDashboard },
   { title: 'All Reports', url: '/admin/reports', icon: FileText },
+  { title: 'Categories', url: '/admin/categories', icon: FolderOpen },
+  { title: 'Analytics', url: '/admin/analytics', icon: BarChart3 },
 ];
 
 const createNavItems = [

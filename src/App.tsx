@@ -15,6 +15,8 @@ import ReportsList from "./pages/admin/ReportsList";
 import CreateReport from "./pages/admin/CreateReport";
 import EditReport from "./pages/admin/EditReport";
 import AIGenerateReport from "./pages/admin/AIGenerateReport";
+import Categories from "./pages/admin/Categories";
+import Analytics from "./pages/admin/Analytics";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +39,8 @@ const App = () => (
               <Route path="reports/new" element={<CreateReport />} />
               <Route path="reports/:id/edit" element={<EditReport />} />
               <Route path="reports/ai" element={<AIGenerateReport />} />
+              <Route path="categories" element={<Categories />} />
+              <Route path="analytics" element={<Analytics />} />
             </Route>
             
             <Route path="*" element={<NotFound />} />
