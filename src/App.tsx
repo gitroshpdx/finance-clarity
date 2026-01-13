@@ -8,6 +8,11 @@ import { ProtectedRoute } from "@/components/admin/ProtectedRoute";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import Index from "./pages/Index";
 import Report from "./pages/Report";
+import Reports from "./pages/Reports";
+import About from "./pages/About";
+import Disclaimer from "./pages/Disclaimer";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsAndConditions from "./pages/TermsAndConditions";
 import NotFound from "./pages/NotFound";
 import AdminLogin from "./pages/admin/Login";
 import AdminDashboard from "./pages/admin/Dashboard";
@@ -29,7 +34,12 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/reports" element={<Reports />} />
             <Route path="/report/:slug" element={<Report />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/disclaimer" element={<Disclaimer />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<TermsAndConditions />} />
             
             {/* Admin Routes */}
             <Route path="/admin/login" element={<AdminLogin />} />
