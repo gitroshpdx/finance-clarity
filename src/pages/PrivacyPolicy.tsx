@@ -2,10 +2,16 @@ import { motion } from 'framer-motion';
 import { Shield } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import SEO from '@/components/SEO';
 
 const PrivacyPolicy = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title="Privacy Policy"
+        description="Learn how Apex Intel Stream collects, uses, and protects your personal information. Your privacy is important to us."
+        canonical="/privacy"
+      />
       <Navigation />
       
       <section className="pt-32 pb-20 px-6">
@@ -36,7 +42,7 @@ const PrivacyPolicy = () => {
             <section className="p-6 rounded-xl bg-card border border-border/50">
               <h2 className="text-xl font-semibold mb-4">Introduction</h2>
               <p className="text-muted-foreground leading-relaxed">
-                At Macro Finance Report ("we," "us," or "our"), we are committed to protecting 
+                At Apex Intel Stream ("we," "us," or "our"), we are committed to protecting 
                 your privacy and ensuring the security of your personal information. This Privacy 
                 Policy explains how we collect, use, disclose, and safeguard your information 
                 when you visit our website or subscribe to our services.
@@ -173,7 +179,7 @@ const PrivacyPolicy = () => {
                 please contact us at:
               </p>
               <p className="text-foreground mt-3">
-                <strong>Email:</strong> privacy@macrofinancereport.com
+                <strong>Email:</strong> privacy@apexintelstream.com
               </p>
             </section>
           </motion.div>

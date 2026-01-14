@@ -2,10 +2,16 @@ import { motion } from 'framer-motion';
 import { FileText } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import SEO from '@/components/SEO';
 
 const TermsAndConditions = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title="Terms and Conditions"
+        description="Read the terms and conditions for using Apex Intel Stream. By accessing our website, you agree to these terms."
+        canonical="/terms"
+      />
       <Navigation />
       
       <section className="pt-32 pb-20 px-6">
@@ -36,7 +42,7 @@ const TermsAndConditions = () => {
             <section className="p-6 rounded-xl bg-card border border-border/50">
               <h2 className="text-xl font-semibold mb-4">1. Acceptance of Terms</h2>
               <p className="text-muted-foreground leading-relaxed">
-                By accessing and using Macro Finance Report ("the Website"), you accept and agree 
+                By accessing and using Apex Intel Stream ("the Website"), you accept and agree 
                 to be bound by these Terms and Conditions ("Terms"). If you do not agree to these 
                 Terms, you must not use the Website. We reserve the right to modify these Terms 
                 at any time, and your continued use of the Website constitutes acceptance of any 
@@ -47,7 +53,7 @@ const TermsAndConditions = () => {
             <section className="p-6 rounded-xl bg-card border border-border/50">
               <h2 className="text-xl font-semibold mb-4">2. Description of Service</h2>
               <p className="text-muted-foreground leading-relaxed">
-                Macro Finance Report provides financial news, analysis, research reports, and 
+                Apex Intel Stream provides financial news, analysis, research reports, and 
                 commentary on global markets, economics, and related topics. Our content is 
                 intended for informational and educational purposes only and does not constitute 
                 financial, investment, or professional advice.
@@ -59,13 +65,13 @@ const TermsAndConditions = () => {
               <div className="text-muted-foreground space-y-3">
                 <p className="leading-relaxed">
                   All content on the Website, including but not limited to text, graphics, logos, 
-                  images, data compilations, and software, is the property of Macro Finance Report 
+                  images, data compilations, and software, is the property of Apex Intel Stream 
                   or its content suppliers and is protected by intellectual property laws.
                 </p>
                 <p className="leading-relaxed">
                   You may not reproduce, distribute, modify, transmit, reuse, repost, or use the 
                   content of the Website for public or commercial purposes without prior written 
-                  consent from Macro Finance Report.
+                  consent from Apex Intel Stream.
                 </p>
                 <p className="leading-relaxed">
                   Limited excerpts may be quoted for personal, non-commercial use with proper 
@@ -120,7 +126,7 @@ const TermsAndConditions = () => {
             <section className="p-6 rounded-xl bg-card border border-border/50">
               <h2 className="text-xl font-semibold mb-4">7. Limitation of Liability</h2>
               <p className="text-muted-foreground leading-relaxed">
-                TO THE FULLEST EXTENT PERMITTED BY LAW, MACRO FINANCE REPORT AND ITS OFFICERS, 
+                TO THE FULLEST EXTENT PERMITTED BY LAW, APEX INTEL STREAM AND ITS OFFICERS, 
                 DIRECTORS, EMPLOYEES, AND AGENTS SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, 
                 SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO LOSS 
                 OF PROFITS, DATA, OR OTHER INTANGIBLE LOSSES, ARISING OUT OF OR RELATED TO YOUR 
@@ -131,7 +137,7 @@ const TermsAndConditions = () => {
             <section className="p-6 rounded-xl bg-card border border-border/50">
               <h2 className="text-xl font-semibold mb-4">8. Indemnification</h2>
               <p className="text-muted-foreground leading-relaxed">
-                You agree to indemnify and hold harmless Macro Finance Report, its affiliates, 
+                You agree to indemnify and hold harmless Apex Intel Stream, its affiliates, 
                 officers, directors, employees, and agents from and against any claims, liabilities, 
                 damages, losses, and expenses, including reasonable attorneys' fees, arising out 
                 of or in any way connected with your access to or use of the Website or your 
@@ -143,7 +149,7 @@ const TermsAndConditions = () => {
               <h2 className="text-xl font-semibold mb-4">9. Third-Party Links</h2>
               <p className="text-muted-foreground leading-relaxed">
                 The Website may contain links to third-party websites or services that are not 
-                owned or controlled by Macro Finance Report. We have no control over, and assume 
+                owned or controlled by Apex Intel Stream. We have no control over, and assume 
                 no responsibility for, the content, privacy policies, or practices of any 
                 third-party websites or services. Your use of third-party websites is at your 
                 own risk.
@@ -164,7 +170,7 @@ const TermsAndConditions = () => {
               <h2 className="text-xl font-semibold mb-4">11. Governing Law</h2>
               <p className="text-muted-foreground leading-relaxed">
                 These Terms shall be governed by and construed in accordance with the laws of 
-                the jurisdiction in which Macro Finance Report operates, without regard to its 
+                the jurisdiction in which Apex Intel Stream operates, without regard to its 
                 conflict of law provisions. Any disputes arising under these Terms shall be 
                 subject to the exclusive jurisdiction of the courts in that jurisdiction.
               </p>
@@ -185,7 +191,7 @@ const TermsAndConditions = () => {
                 If you have any questions about these Terms and Conditions, please contact us at:
               </p>
               <p className="text-foreground mt-3">
-                <strong>Email:</strong> legal@macrofinancereport.com
+                <strong>Email:</strong> legal@apexintelstream.com
               </p>
             </section>
           </motion.div>
