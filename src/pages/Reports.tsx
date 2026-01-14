@@ -5,6 +5,7 @@ import { X } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import ReportCard from '@/components/ReportCard';
+import SEO from '@/components/SEO';
 import { usePublishedReports } from '@/hooks/useReports';
 import { useCategories } from '@/hooks/useCategories';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -30,8 +31,31 @@ const Reports = () => {
     );
   }, [reports, categorySlug]);
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": activeCategory ? `${activeCategory.name} Reports` : "All Reports",
+    "description": activeCategory 
+      ? `Explore our latest ${activeCategory.name.toLowerCase()} analysis and insights.`
+      : "Browse our complete collection of financial analysis and market insights.",
+    "url": `https://apex-intel-stream.lovable.app/reports${categorySlug ? `?category=${categorySlug}` : ''}`,
+    "publisher": {
+      "@type": "Organization",
+      "name": "Apex Intel Stream"
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title={activeCategory ? `${activeCategory.name} Reports` : "All Reports"}
+        description={activeCategory 
+          ? `Explore our latest ${activeCategory.name.toLowerCase()} analysis and insights.`
+          : "Browse our complete collection of financial analysis and market insights."
+        }
+        canonical={`/reports${categorySlug ? `?category=${categorySlug}` : ''}`}
+        structuredData={structuredData}
+      />
       <Navigation />
       
       <section className="pt-32 pb-20 px-6">

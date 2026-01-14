@@ -2,10 +2,16 @@ import { motion } from 'framer-motion';
 import { AlertTriangle } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import SEO from '@/components/SEO';
 
 const Disclaimer = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title="Disclaimer"
+        description="Important disclaimer regarding the use of information provided on Apex Intel Stream. Read our terms of use and limitations."
+        canonical="/disclaimer"
+      />
       <Navigation />
       
       <section className="pt-32 pb-20 px-6">
@@ -37,7 +43,7 @@ const Disclaimer = () => {
               <section className="p-6 rounded-xl bg-card border border-border/50">
                 <h2 className="text-xl font-semibold mb-4">General Information Only</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  The content provided on Macro Finance Report is for informational and educational 
+                  The content provided on Apex Intel Stream is for informational and educational 
                   purposes only and should not be construed as financial, investment, legal, tax, 
                   or any other type of professional advice. All information is provided "as is" 
                   without any representations or warranties, express or implied.
@@ -62,8 +68,8 @@ const Disclaimer = () => {
               <section className="p-6 rounded-xl bg-card border border-border/50">
                 <h2 className="text-xl font-semibold mb-4">No Guarantees</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  While we strive to provide accurate and up-to-date information, Macro Finance 
-                  Report makes no guarantees regarding the accuracy, completeness, timeliness, 
+                  While we strive to provide accurate and up-to-date information, Apex Intel 
+                  Stream makes no guarantees regarding the accuracy, completeness, timeliness, 
                   or reliability of any content. Financial markets are inherently volatile and 
                   unpredictable, and past performance is not indicative of future results.
                 </p>
@@ -73,7 +79,7 @@ const Disclaimer = () => {
                 <h2 className="text-xl font-semibold mb-4">Reader Responsibility</h2>
                 <p className="text-muted-foreground leading-relaxed">
                   You acknowledge and agree that you are solely responsible for any decisions 
-                  you make based on information found on this website. Macro Finance Report 
+                  you make based on information found on this website. Apex Intel Stream 
                   and its authors, contributors, and affiliates shall not be held liable for 
                   any losses, damages, or other consequences arising from your use of this 
                   information.
@@ -94,7 +100,7 @@ const Disclaimer = () => {
                 <h2 className="text-xl font-semibold mb-4">Third-Party Content</h2>
                 <p className="text-muted-foreground leading-relaxed">
                   This website may contain links to third-party websites or reference third-party 
-                  data and research. Macro Finance Report does not endorse and is not responsible 
+                  data and research. Apex Intel Stream does not endorse and is not responsible 
                   for the content, accuracy, or opinions expressed on such third-party sites.
                 </p>
               </section>

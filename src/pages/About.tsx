@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Target, Shield, Globe, TrendingUp, Users, Award } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import SEO from '@/components/SEO';
 
 const About = () => {
   const values = [
@@ -29,8 +30,28 @@ const About = () => {
     { value: '98%', label: 'Reader Satisfaction' },
   ];
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Apex Intel Stream",
+    "url": "https://apex-intel-stream.lovable.app",
+    "description": "Cutting-edge financial intelligence and macro analysis for informed decision-making.",
+    "sameAs": [],
+    "foundingDate": "2024",
+    "numberOfEmployees": {
+      "@type": "QuantitativeValue",
+      "value": "10-50"
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title="About Us"
+        description="Learn about Apex Intel Stream - delivering cutting-edge financial intelligence and macro analysis to decision-makers worldwide."
+        canonical="/about"
+        structuredData={structuredData}
+      />
       <Navigation />
       
       {/* Hero Section */}
@@ -49,7 +70,7 @@ const About = () => {
               <span className="text-primary">Breathtakingly Clear</span>
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-              Macro Finance Report delivers premium financial intelligence to decision-makers worldwide. 
+              Apex Intel Stream delivers premium financial intelligence to decision-makers worldwide. 
               We bridge the gap between complex economic data and actionable insights.
             </p>
           </motion.div>

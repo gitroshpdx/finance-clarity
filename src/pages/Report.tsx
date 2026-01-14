@@ -10,6 +10,7 @@ import ArticleContent from '@/components/report/ArticleContent';
 import TableOfContents from '@/components/report/TableOfContents';
 import ShareActions from '@/components/report/ShareActions';
 import RelatedReports from '@/components/report/RelatedReports';
+import SEO from '@/components/SEO';
 import { useReportBySlug } from '@/hooks/useReports';
 
 const Report = () => {
@@ -33,6 +34,11 @@ const Report = () => {
   if (error || !report) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
+        <SEO 
+          title="Report Not Found"
+          description="The report you're looking for doesn't exist."
+          noindex={true}
+        />
         <div className="text-center">
           <h1 className="text-4xl font-serif font-bold text-foreground mb-4">Report Not Found</h1>
           <p className="text-muted-foreground mb-8">The report you're looking for doesn't exist.</p>
@@ -48,8 +54,46 @@ const Report = () => {
     );
   }
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": report.title,
+    "description": report.excerpt || `Read our analysis on ${report.title}`,
+    "image": report.featured_image_url || "https://apex-intel-stream.lovable.app/og-image.png",
+    "datePublished": report.published_at,
+    "dateModified": report.updated_at,
+    "author": {
+      "@type": "Person",
+      "name": report.author_name || "Editorial Team"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Apex Intel Stream",
+      "url": "https://apex-intel-stream.lovable.app"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://apex-intel-stream.lovable.app/report/${report.slug}`
+    },
+    "articleSection": report.category,
+    "keywords": report.tags?.join(', ') || ''
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEO 
+        title={report.title}
+        description={report.excerpt || `Read our in-depth analysis on ${report.title}`}
+        canonical={`/report/${report.slug}`}
+        image={report.featured_image_url}
+        type="article"
+        publishedTime={report.published_at || undefined}
+        modifiedTime={report.updated_at}
+        author={report.author_name || "Editorial Team"}
+        section={report.category}
+        tags={report.tags || undefined}
+        structuredData={structuredData}
+      />
       <ScrollProgress />
       <Navigation />
       
