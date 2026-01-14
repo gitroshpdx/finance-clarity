@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 
-const SITE_URL = 'https://apex-intel-stream.lovable.app';
-const SITE_NAME = 'Apex Intel Stream';
+const SITE_URL = 'https://macrofinancereport.com';
+const SITE_NAME = 'Macro Finance Report';
 const DEFAULT_IMAGE = `${SITE_URL}/og-image.png`;
 
 interface SEOProps {
