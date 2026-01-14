@@ -35,7 +35,8 @@ const SEO = ({
 }: SEOProps) => {
   const fullTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
   const canonicalUrl = canonical ? `${SITE_URL}${canonical}` : SITE_URL;
-  const imageUrl = image.startsWith('http') ? image : `${SITE_URL}${image}`;
+  const safeImage = image || DEFAULT_IMAGE;
+  const imageUrl = safeImage.startsWith('http') ? safeImage : `${SITE_URL}${safeImage}`;
 
   return (
     <Helmet>
