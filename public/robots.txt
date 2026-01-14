@@ -16,4 +16,4 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 
-Sitemap: https://cqivqqhshxetmecpzcsr.supabase.co/functions/v1/sitemap
+Sitemap: https://macrofinancereport.com/sitemap.xml

@@ -6,7 +6,7 @@ const corsHeaders = {
   'Content-Type': 'application/xml',
 };
 
-const SITE_URL = 'https://apex-intel-stream.lovable.app';
+const SITE_URL = 'https://macrofinancereport.com';
 
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
