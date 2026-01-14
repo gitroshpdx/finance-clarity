@@ -59,7 +59,7 @@ const Report = () => {
     "@type": "Article",
     "headline": report.title,
     "description": report.excerpt || `Read our analysis on ${report.title}`,
-    "image": report.featured_image_url || "https://apex-intel-stream.lovable.app/og-image.png",
+    "image": report.featured_image_url || "https://macrofinancereport.com/og-image.png",
     "datePublished": report.published_at,
     "dateModified": report.updated_at,
     "author": {
@@ -68,12 +68,12 @@ const Report = () => {
     },
     "publisher": {
       "@type": "Organization",
-      "name": "Apex Intel Stream",
-      "url": "https://apex-intel-stream.lovable.app"
+      "name": "Macro Finance Report",
+      "url": "https://macrofinancereport.com"
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://apex-intel-stream.lovable.app/report/${report.slug}`
+      "@id": `https://macrofinancereport.com/report/${report.slug}`
     },
     "articleSection": report.category,
     "keywords": report.tags?.join(', ') || ''
