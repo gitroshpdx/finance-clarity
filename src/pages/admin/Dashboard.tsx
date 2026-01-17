@@ -12,9 +12,11 @@ import {
   PenLine, 
   Sparkles,
   ArrowRight,
-  Loader2
+  Loader2,
+  Wand2
 } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
+import { toast } from 'sonner';
 
 interface DashboardStats {
   totalReports: number;
@@ -38,6 +40,38 @@ export default function AdminDashboard() {
     recentReports: [],
   });
   const [loading, setLoading] = useState(true);
+  const [transforming, setTransforming] = useState(false);
+
+  const handleTransformArticles = async () => {
+    setTransforming(true);
+    toast.info('Transforming articles to premium format...', { duration: 10000 });
+    
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/transform-articles`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+          },
+          body: JSON.stringify({}),
+        }
+      );
+      
+      if (!response.ok) {
+        throw new Error('Transform failed');
+      }
+      
+      const data = await response.json();
+      toast.success(`Transformed ${data.results?.filter((r: any) => r.status === 'success').length || 0} articles successfully!`);
+    } catch (error) {
+      console.error('Transform error:', error);
+      toast.error('Failed to transform articles. Check console for details.');
+    } finally {
+      setTransforming(false);
+    }
+  };
 
   useEffect(() => {
     async function fetchStats() {
@@ -173,11 +207,25 @@ export default function AdminDashboard() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button asChild variant="secondary">
-              <Link to="/admin/reports/ai">
-                Generate with AI <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+            <div className="flex gap-2">
+              <Button asChild variant="secondary">
+                <Link to="/admin/reports/ai">
+                  Generate with AI <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+              <Button
+                variant="outline"
+                onClick={handleTransformArticles}
+                disabled={transforming}
+              >
+                {transforming ? (
+                  <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                ) : (
+                  <Wand2 className="h-4 w-4 mr-2" />
+                )}
+                Transform All
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </div>

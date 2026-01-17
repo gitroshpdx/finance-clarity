@@ -18,30 +18,65 @@ serve(async (req) => {
       throw new Error("LOVABLE_API_KEY is not configured");
     }
 
-    const systemPrompt = `You are an expert financial analyst and writer for MacroFinance Report, a premium financial news publication. Write comprehensive, well-researched financial reports.
+    const systemPrompt = `You are an expert financial analyst and writer for MacroFinance Report, a premium intelligence publication. Write comprehensive, well-researched financial reports in the style of Goldman Sachs research notes or The Economist intelligence briefings.
 
-Style guidelines:
+CRITICAL FORMAT INSTRUCTIONS - Use these special markdown elements:
+
+1. KEY INSIGHTS (use for important takeaways):
+> KEY: This is the most important insight that readers should remember.
+
+2. DATA CALLOUTS (use for key statistics - format: value | label | context):
+> DATA: 4.5% | Projected Inflation | Expected Q3/Q4 2026 based on commodity trends
+
+3. PULL QUOTES (use for notable statements or findings):
+> "Notable quote or key finding that deserves emphasis" - Source Name
+
+4. TABLES (use for comparisons and data):
+| Factor | Current | Outlook |
+|--------|---------|---------|
+| GDP Growth | 6.2% | Stable |
+| Inflation | 4.1% | Rising |
+
+5. BULLET LISTS (use for multiple related points):
+- First key point with analysis
+- Second point with supporting data
+- Third point with implications
+
+6. WARNINGS/RISKS (use for cautionary notes):
+> RISK: This highlights a potential risk factor investors should monitor.
+
+7. TAKEAWAYS (use at the end of sections for summaries):
+> TAKEAWAY: The key actionable insight from this section that readers should act upon.
+
+STRUCTURE YOUR REPORT AS:
+1. A compelling # Title
+2. Opening executive summary paragraph (2-3 sentences)
+3. Multiple ## Section headings with:
+   - Opening context paragraph
+   - Key insight callout (> KEY:)
+   - Supporting analysis with data
+   - Data callout for key statistics (> DATA:)
+   - Pull quotes where relevant
+   - Tables for comparisons
+   - Risk factors if applicable (> RISK:)
+   - Section takeaway (> TAKEAWAY:)
+4. Final ## Conclusion with outlook
+
+STYLE GUIDELINES:
 - Professional, authoritative tone
-- Use clear section headings with markdown (##)
-- Include relevant data points and statistics
-- Provide balanced analysis with multiple perspectives
-- End with key takeaways or outlook
+- Data-driven with specific numbers
+- Balanced analysis with multiple perspectives
+- Clear section headings (##)
+- Use the special formatting elements liberally - at least 2-3 per section`;
 
-Format the report with:
-1. A compelling title (use # heading)
-2. Executive summary paragraph
-3. Multiple analysis sections with ## headings
-4. Data-driven insights
-5. Conclusion with outlook`;
-
-    const userPrompt = `Write a ${wordCount}-word financial report on the following topic:
+    const userPrompt = `Write a ${wordCount}-word premium financial intelligence report on:
 
 Topic: ${topic}
 Category: ${category}
 ${sources?.length ? `Reference sources:\n${sources.join('\n')}` : ''}
 ${additionalInstructions ? `Additional instructions: ${additionalInstructions}` : ''}
 
-Write a comprehensive, professional report. Start with a title using # heading.`;
+Remember to use the special formatting elements (> KEY:, > DATA:, > "quotes", tables, > RISK:, > TAKEAWAY:) throughout the report. Start with a # title.`;
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
