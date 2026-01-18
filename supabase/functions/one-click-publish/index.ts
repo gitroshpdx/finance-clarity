@@ -6,16 +6,16 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-// Category to search query mapping with date filters for freshness
+// Category to search query mapping - broader queries for more results
 const categorySearchQueries: Record<string, string> = {
-  "Markets": "stock market equities trading today site:reuters.com OR site:bloomberg.com",
-  "Economy": "economic GDP inflation employment today site:reuters.com OR site:ft.com",
-  "Commodities": "oil gold commodities prices today site:reuters.com OR site:marketwatch.com",
-  "Central Banks": "federal reserve ECB interest rates monetary policy site:reuters.com OR site:ft.com",
-  "Crypto": "bitcoin cryptocurrency ethereum today site:coindesk.com OR site:reuters.com",
-  "Geopolitics": "trade sanctions geopolitics international site:reuters.com OR site:ft.com",
-  "Technology": "tech stocks AI artificial intelligence site:reuters.com OR site:bloomberg.com",
-  "Real Estate": "real estate housing market mortgage rates site:reuters.com OR site:bloomberg.com",
+  "Markets": "stock market equities trading site:reuters.com OR site:bloomberg.com OR site:cnbc.com",
+  "Economy": "economic GDP inflation employment site:reuters.com OR site:ft.com OR site:wsj.com",
+  "Commodities": "oil gold commodities prices site:reuters.com OR site:marketwatch.com OR site:bloomberg.com",
+  "Central Banks": "federal reserve ECB central bank interest rates monetary policy site:reuters.com OR site:ft.com OR site:bloomberg.com",
+  "Crypto": "bitcoin cryptocurrency ethereum crypto market site:coindesk.com OR site:reuters.com OR site:bloomberg.com",
+  "Geopolitics": "trade sanctions geopolitics international relations site:reuters.com OR site:ft.com OR site:bbc.com",
+  "Technology": "tech stocks AI artificial intelligence technology site:reuters.com OR site:bloomberg.com OR site:techcrunch.com",
+  "Real Estate": "real estate housing market mortgage rates property site:reuters.com OR site:bloomberg.com OR site:wsj.com",
 };
 
 // Quality validation thresholds
@@ -208,42 +208,58 @@ serve(async (req) => {
     
     console.log(`Found ${usedUrls.size} used URLs from recent ${category} articles`);
 
-    // Step 2: Search for latest news using Firecrawl with date filter
-    const today = new Date().toISOString().split('T')[0];
-    const searchQuery = `${categorySearchQueries[category] || `${category} news today site:reuters.com`} after:${today}`;
+    // Step 2: Search for latest news using Firecrawl with time-based filter
+    const searchQuery = categorySearchQueries[category] || `${category} news site:reuters.com OR site:bloomberg.com`;
     console.log(`Searching for: ${searchQuery}`);
 
-    const searchResponse = await fetch("https://api.firecrawl.dev/v1/search", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${FIRECRAWL_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        query: searchQuery,
-        limit: 8, // Request more to filter out duplicates
-        tbs: "qdr:d", // Last 24 hours
-        scrapeOptions: {
-          formats: ["markdown"],
+    // Helper function to search with a specific time filter
+    const searchWithTimeFilter = async (query: string, tbs: string): Promise<any> => {
+      const response = await fetch("https://api.firecrawl.dev/v1/search", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${FIRECRAWL_API_KEY}`,
+          "Content-Type": "application/json",
         },
-      }),
-    });
+        body: JSON.stringify({
+          query,
+          limit: 10, // Request more to filter out duplicates
+          tbs, // Time-based filter
+          scrapeOptions: {
+            formats: ["markdown"],
+          },
+        }),
+      });
 
-    if (!searchResponse.ok) {
-      const errorText = await searchResponse.text();
-      console.error("Firecrawl search error:", errorText);
-      return new Response(
-        JSON.stringify({ success: false, error: "Failed to search for news articles" }),
-        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error(`Firecrawl search error (tbs=${tbs}):`, errorText);
+        return null;
+      }
+
+      return response.json();
+    };
+
+    // Try weekly filter first
+    console.log("Searching with weekly filter (qdr:w)...");
+    let searchData = await searchWithTimeFilter(searchQuery, "qdr:w");
+    
+    // If no results, try monthly filter as fallback
+    if (!searchData?.data?.length) {
+      console.log("No results in last week, trying monthly filter (qdr:m)...");
+      searchData = await searchWithTimeFilter(searchQuery, "qdr:m");
     }
 
-    const searchData = await searchResponse.json();
-    console.log(`Found ${searchData.data?.length || 0} articles`);
+    // If still no results, try without time filter as last resort
+    if (!searchData?.data?.length) {
+      console.log("No results in last month, trying without time filter...");
+      searchData = await searchWithTimeFilter(searchQuery, "");
+    }
 
-    if (!searchData.data || searchData.data.length === 0) {
+    console.log(`Found ${searchData?.data?.length || 0} articles`);
+
+    if (!searchData?.data || searchData.data.length === 0) {
       return new Response(
-        JSON.stringify({ success: false, error: "No news articles found for this category" }),
+        JSON.stringify({ success: false, error: "No news articles found for this category. Please try a different category." }),
         { status: 404, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
