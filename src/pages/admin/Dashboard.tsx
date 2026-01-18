@@ -13,7 +13,8 @@ import {
   Sparkles,
   ArrowRight,
   Loader2,
-  Wand2
+  Wand2,
+  Zap
 } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { toast } from 'sonner';
@@ -226,6 +227,25 @@ export default function AdminDashboard() {
                 Transform All
               </Button>
             </div>
+          </CardContent>
+        </Card>
+
+        <Card className="border-dashed hover:border-primary/50 transition-colors bg-gradient-to-br from-amber-500/5 to-transparent">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Zap className="h-5 w-5 text-amber-500" />
+              Auto-Publish
+            </CardTitle>
+            <CardDescription>
+              Transform raw news data into premium articles automatically.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Button asChild variant="outline">
+              <Link to="/admin/auto-publish">
+                Open Pipeline <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
           </CardContent>
         </Card>
       </div>
