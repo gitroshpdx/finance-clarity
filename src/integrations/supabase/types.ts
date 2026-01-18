@@ -70,11 +70,14 @@ export type Database = {
           body: string
           category: string
           created_at: string
+          eeat_signals: Json | null
           excerpt: string | null
           featured_image_url: string | null
           id: string
           published_at: string | null
+          quality_score: number | null
           slug: string
+          source_urls: string[] | null
           status: string
           tags: string[] | null
           title: string
@@ -88,11 +91,14 @@ export type Database = {
           body: string
           category: string
           created_at?: string
+          eeat_signals?: Json | null
           excerpt?: string | null
           featured_image_url?: string | null
           id?: string
           published_at?: string | null
+          quality_score?: number | null
           slug: string
+          source_urls?: string[] | null
           status?: string
           tags?: string[] | null
           title: string
@@ -106,11 +112,14 @@ export type Database = {
           body?: string
           category?: string
           created_at?: string
+          eeat_signals?: Json | null
           excerpt?: string | null
           featured_image_url?: string | null
           id?: string
           published_at?: string | null
+          quality_score?: number | null
           slug?: string
+          source_urls?: string[] | null
           status?: string
           tags?: string[] | null
           title?: string

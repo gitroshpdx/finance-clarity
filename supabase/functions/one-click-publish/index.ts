@@ -6,7 +6,7 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-// Category to search query mapping for news scraping
+// Category to search query mapping with date filters for freshness
 const categorySearchQueries: Record<string, string> = {
   "Markets": "stock market equities trading today site:reuters.com OR site:bloomberg.com",
   "Economy": "economic GDP inflation employment today site:reuters.com OR site:ft.com",
@@ -18,13 +18,145 @@ const categorySearchQueries: Record<string, string> = {
   "Real Estate": "real estate housing market mortgage rates site:reuters.com OR site:bloomberg.com",
 };
 
+// Quality validation thresholds
+const QUALITY_THRESHOLDS = {
+  minWordCount: 1500,
+  minHeadings: 4,
+  minDataPoints: 3,
+  minKeyInsights: 2,
+  minSourcesCited: 2,
+  minOverallScore: 70,
+};
+
+interface QualityChecks {
+  wordCount: { min: number; actual: number; passed: boolean };
+  headingCount: { min: number; actual: number; passed: boolean };
+  dataPointCount: { min: number; actual: number; passed: boolean };
+  keyInsightCount: { min: number; actual: number; passed: boolean };
+  hasConclusion: boolean;
+  sourcesCited: { min: number; actual: number; passed: boolean };
+  overallScore: number;
+}
+
+interface EEATSignals {
+  sources_cited: number;
+  data_verification_date: string;
+  author_expertise_stated: boolean;
+  forward_looking_disclaimer: boolean;
+  methodology_included: boolean;
+}
+
+function calculateQualityScore(body: string, sourceCount: number): { qualityChecks: QualityChecks; eeatSignals: EEATSignals } {
+  const wordCount = body.split(/\s+/).filter(w => w.length > 0).length;
+  const headingCount = (body.match(/^## /gm) || []).length;
+  const dataPointCount = (body.match(/^> DATA:/gm) || []).length;
+  const keyInsightCount = (body.match(/^> KEY:/gm) || []).length;
+  const hasConclusion = body.toLowerCase().includes("## key takeaways") || body.toLowerCase().includes("## conclusion");
+  
+  // EEAT signals detection
+  const hasMethodology = body.toLowerCase().includes("methodology") || body.toLowerCase().includes("## sources");
+  const hasDisclaimer = body.toLowerCase().includes("forward-looking") || body.toLowerCase().includes("not financial advice");
+  const hasExpertise = body.toLowerCase().includes("analysis by") || body.toLowerCase().includes("research team");
+  const hasDataVerification = body.includes("Data as of") || body.includes("verified as of");
+  
+  const qualityChecks: QualityChecks = {
+    wordCount: { min: QUALITY_THRESHOLDS.minWordCount, actual: wordCount, passed: wordCount >= QUALITY_THRESHOLDS.minWordCount },
+    headingCount: { min: QUALITY_THRESHOLDS.minHeadings, actual: headingCount, passed: headingCount >= QUALITY_THRESHOLDS.minHeadings },
+    dataPointCount: { min: QUALITY_THRESHOLDS.minDataPoints, actual: dataPointCount, passed: dataPointCount >= QUALITY_THRESHOLDS.minDataPoints },
+    keyInsightCount: { min: QUALITY_THRESHOLDS.minKeyInsights, actual: keyInsightCount, passed: keyInsightCount >= QUALITY_THRESHOLDS.minKeyInsights },
+    hasConclusion,
+    sourcesCited: { min: QUALITY_THRESHOLDS.minSourcesCited, actual: sourceCount, passed: sourceCount >= QUALITY_THRESHOLDS.minSourcesCited },
+    overallScore: 0,
+  };
+  
+  // Calculate score
+  let score = 0;
+  if (qualityChecks.wordCount.passed) score += 20;
+  if (qualityChecks.headingCount.passed) score += 15;
+  if (qualityChecks.dataPointCount.passed) score += 15;
+  if (qualityChecks.keyInsightCount.passed) score += 15;
+  if (qualityChecks.hasConclusion) score += 10;
+  if (qualityChecks.sourcesCited.passed) score += 15;
+  
+  // EEAT bonus (up to 10 points)
+  let eeatBonus = 0;
+  if (hasMethodology) eeatBonus += 2;
+  if (hasDisclaimer) eeatBonus += 2;
+  if (hasExpertise) eeatBonus += 2;
+  if (hasDataVerification) eeatBonus += 2;
+  if (sourceCount >= 3) eeatBonus += 2;
+  score += eeatBonus;
+  
+  qualityChecks.overallScore = Math.min(score, 100);
+  
+  const eeatSignals: EEATSignals = {
+    sources_cited: sourceCount,
+    data_verification_date: new Date().toISOString().split('T')[0],
+    author_expertise_stated: hasExpertise,
+    forward_looking_disclaimer: hasDisclaimer,
+    methodology_included: hasMethodology,
+  };
+  
+  return { qualityChecks, eeatSignals };
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    const { category } = await req.json();
+    const { category, preview = false, publishData } = await req.json();
+
+    // Handle publish/save actions for preview data
+    if (publishData) {
+      const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
+      const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+      const supabase = createClient(SUPABASE_URL!, SUPABASE_SERVICE_ROLE_KEY!);
+      
+      const { data: insertedReport, error: insertError } = await supabase
+        .from("reports")
+        .insert({
+          title: publishData.title,
+          slug: publishData.slug,
+          excerpt: publishData.excerpt,
+          body: publishData.body,
+          category: publishData.category,
+          tags: publishData.tags,
+          status: publishData.status,
+          published_at: publishData.status === "published" ? new Date().toISOString() : null,
+          word_count: publishData.wordCount,
+          author_name: "MacroFinance AI Research",
+          author_role: "AI-Assisted Analysis Team",
+          source_urls: publishData.sourceUrls,
+          quality_score: publishData.qualityScore,
+          eeat_signals: publishData.eeatSignals,
+        })
+        .select()
+        .single();
+
+      if (insertError) {
+        console.error("Database insert error:", insertError);
+        return new Response(
+          JSON.stringify({ success: false, error: "Failed to save article to database" }),
+          { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      return new Response(
+        JSON.stringify({
+          success: true,
+          article: {
+            id: insertedReport.id,
+            title: insertedReport.title,
+            slug: insertedReport.slug,
+            category: insertedReport.category,
+            wordCount: publishData.wordCount,
+          },
+        }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
 
     if (!category) {
       return new Response(
@@ -33,7 +165,7 @@ serve(async (req) => {
       );
     }
 
-    console.log(`Starting one-click publish for category: ${category}`);
+    console.log(`Starting one-click publish for category: ${category}, preview: ${preview}`);
 
     const FIRECRAWL_API_KEY = Deno.env.get("FIRECRAWL_API_KEY");
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
@@ -54,8 +186,31 @@ serve(async (req) => {
       );
     }
 
-    // Step 1: Search for latest news using Firecrawl
-    const searchQuery = categorySearchQueries[category] || `${category} news today site:reuters.com`;
+    const supabase = createClient(SUPABASE_URL!, SUPABASE_SERVICE_ROLE_KEY!);
+
+    // Step 1: Check for duplicate sources from recent articles
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+    
+    const { data: recentArticles } = await supabase
+      .from("reports")
+      .select("source_urls")
+      .eq("category", category)
+      .gte("created_at", sevenDaysAgo.toISOString())
+      .not("source_urls", "is", null);
+
+    const usedUrls = new Set<string>();
+    recentArticles?.forEach(article => {
+      if (article.source_urls) {
+        article.source_urls.forEach((url: string) => usedUrls.add(url));
+      }
+    });
+    
+    console.log(`Found ${usedUrls.size} used URLs from recent ${category} articles`);
+
+    // Step 2: Search for latest news using Firecrawl with date filter
+    const today = new Date().toISOString().split('T')[0];
+    const searchQuery = `${categorySearchQueries[category] || `${category} news today site:reuters.com`} after:${today}`;
     console.log(`Searching for: ${searchQuery}`);
 
     const searchResponse = await fetch("https://api.firecrawl.dev/v1/search", {
@@ -66,7 +221,8 @@ serve(async (req) => {
       },
       body: JSON.stringify({
         query: searchQuery,
-        limit: 5,
+        limit: 8, // Request more to filter out duplicates
+        tbs: "qdr:d", // Last 24 hours
         scrapeOptions: {
           formats: ["markdown"],
         },
@@ -92,9 +248,27 @@ serve(async (req) => {
       );
     }
 
-    // Step 2: Combine scraped content
-    const rawNewsContent = searchData.data
-      .slice(0, 3)
+    // Step 3: Filter out duplicate sources
+    const uniqueArticles = searchData.data.filter(
+      (article: any) => article.url && !usedUrls.has(article.url)
+    );
+
+    if (uniqueArticles.length < 2) {
+      return new Response(
+        JSON.stringify({ 
+          success: false, 
+          error: "Not enough unique sources available. Please try again later or choose a different category." 
+        }),
+        { status: 409, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Take top 3 unique articles
+    const selectedArticles = uniqueArticles.slice(0, 3);
+    const sourceUrls = selectedArticles.map((a: any) => a.url);
+
+    // Step 4: Combine scraped content
+    const rawNewsContent = selectedArticles
       .map((article: any, index: number) => {
         return `
 === SOURCE ${index + 1} ===
@@ -108,43 +282,57 @@ ${article.markdown || article.description || "No content available"}
 
     console.log("Combined content length:", rawNewsContent.length);
 
-    // Step 3: Generate premium article using AI
-    const systemPrompt = `You are an elite financial journalist creating premium macro finance articles. Your articles are data-rich, insightful, and feature sophisticated formatting.
+    // Step 5: Generate premium article using AI with EEAT compliance
+    const systemPrompt = `You are an elite financial journalist creating premium macro finance articles for a professional readership. Your articles are data-rich, insightful, and follow Google's EEAT guidelines (Experience, Expertise, Authoritativeness, Trustworthiness).
 
 ARTICLE REQUIREMENTS:
 1. Create a compelling, SEO-optimized title (under 80 characters)
 2. Write an engaging excerpt (under 200 characters)
 3. Generate 5-8 relevant tags as an array
-4. Write a comprehensive article body (1500-2500 words)
+4. Write a comprehensive article body (1800-2500 words minimum)
 
-BODY FORMATTING - Use these special markers:
-- "> KEY: [label]" for key insight callouts (use 2-3 per article)
-- "> DATA: [stat]" for important statistics/data points (use 3-5 per article)
-- Use ## for section headers
+BODY FORMATTING - Use these REQUIRED markers:
+- "> KEY: [insight text]" for key insight callouts (MUST use 3-4 per article)
+- "> DATA: [stat]" for important statistics/data points (MUST use 4-5 per article)
+- Use ## for section headers (MUST have at least 5 sections)
 - Use **bold** for emphasis on key terms
 - Use bullet points for lists
-- Include a "## Key Takeaways" section at the end
+- MUST include a "## Key Takeaways" section at the end
+
+EEAT COMPLIANCE (REQUIRED):
+1. Start with "Analysis by MacroFinance Research Team" byline with brief expertise statement
+2. Cite sources explicitly: "According to [Source Name]..." or "[Source] reports that..."
+3. Include "Data verified as of [today's date]" for key statistics
+4. Add this disclaimer before Key Takeaways: "**Disclaimer:** This analysis contains forward-looking statements and should not be considered financial advice."
+5. End with a "## Sources & Methodology" section listing the sources consulted
+6. Never present AI analysis as definitive human expert opinion - use phrases like "analysis suggests" or "data indicates"
 
 WRITING STYLE:
-- Professional, authoritative tone
-- Data-driven analysis with specific numbers
-- Forward-looking insights and implications
+- Professional, authoritative tone befitting institutional finance
+- Data-driven analysis with specific numbers and percentages
+- Forward-looking insights with clear reasoning
 - Balance technical depth with accessibility
+- Original synthesis beyond source material
 
 OUTPUT: Return a structured JSON response with title, excerpt, tags, and body fields.`;
 
-    const userPrompt = `Transform this raw news data into a premium ${category} analysis article:
+    const userPrompt = `Transform this raw news data into a premium ${category} analysis article that meets all EEAT and quality requirements:
 
 ${rawNewsContent}
 
-Requirements:
-- Synthesize information from multiple sources
-- Add analysis and forward-looking commentary
-- Include specific data points and statistics
-- Create original insights beyond the source material
-- Format with KEY and DATA callouts as specified`;
+CRITICAL Requirements:
+- Synthesize information from ALL provided sources
+- Add original analysis and forward-looking commentary
+- Include at least 4-5 specific data points with "> DATA:" markers
+- Include at least 3-4 key insights with "> KEY:" markers
+- Create at least 5 section headings with ##
+- Include the EEAT compliance elements (byline, source citations, disclaimer, methodology section)
+- Minimum 1800 words for the body
+- End with ## Key Takeaways section
 
-    console.log("Calling AI to generate article...");
+Today's date for data verification: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`;
+
+    console.log("Calling AI to generate EEAT-compliant article...");
 
     const aiResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
@@ -163,7 +351,7 @@ Requirements:
             type: "function",
             function: {
               name: "create_article",
-              description: "Create a premium financial article with structured data",
+              description: "Create a premium EEAT-compliant financial article with structured data",
               parameters: {
                 type: "object",
                 properties: {
@@ -182,7 +370,7 @@ Requirements:
                   },
                   body: {
                     type: "string",
-                    description: "Full article body with KEY and DATA markers, 1500-2500 words",
+                    description: "Full article body with KEY and DATA markers, EEAT elements, minimum 1800 words",
                   },
                 },
                 required: ["title", "excerpt", "tags", "body"],
@@ -232,7 +420,12 @@ Requirements:
     const article = JSON.parse(toolCall.function.arguments);
     console.log("Parsed article:", article.title);
 
-    // Step 4: Generate slug
+    // Step 6: Calculate quality score and EEAT signals
+    const { qualityChecks, eeatSignals } = calculateQualityScore(article.body, sourceUrls.length);
+    
+    console.log(`Quality score: ${qualityChecks.overallScore}/100`);
+
+    // Step 7: Generate slug
     const slug = article.title
       .toLowerCase()
       .replace(/[^a-z0-9\s-]/g, "")
@@ -240,11 +433,40 @@ Requirements:
       .replace(/-+/g, "-")
       .substring(0, 80) + "-" + Date.now().toString(36);
 
-    // Step 5: Calculate word count
-    const wordCount = article.body.split(/\s+/).length;
+    // Step 8: Return preview data or publish directly
+    if (preview) {
+      return new Response(
+        JSON.stringify({
+          success: true,
+          preview: true,
+          data: {
+            title: article.title,
+            excerpt: article.excerpt,
+            body: article.body,
+            tags: article.tags,
+            category: category,
+            slug: slug,
+            wordCount: qualityChecks.wordCount.actual,
+            sourceUrls: sourceUrls,
+            qualityChecks: qualityChecks,
+            eeatSignals: eeatSignals,
+          },
+        }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
 
-    // Step 6: Insert into database
-    const supabase = createClient(SUPABASE_URL!, SUPABASE_SERVICE_ROLE_KEY!);
+    // Direct publish (legacy mode)
+    if (qualityChecks.overallScore < QUALITY_THRESHOLDS.minOverallScore) {
+      return new Response(
+        JSON.stringify({ 
+          success: false, 
+          error: `Article quality score (${qualityChecks.overallScore}) is below the minimum threshold (${QUALITY_THRESHOLDS.minOverallScore}). Please try regenerating.`,
+          qualityChecks: qualityChecks,
+        }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
 
     const { data: insertedReport, error: insertError } = await supabase
       .from("reports")
@@ -257,9 +479,12 @@ Requirements:
         tags: article.tags,
         status: "published",
         published_at: new Date().toISOString(),
-        word_count: wordCount,
-        author_name: "MacroFinance AI",
-        author_role: "AI Research Team",
+        word_count: qualityChecks.wordCount.actual,
+        author_name: "MacroFinance AI Research",
+        author_role: "AI-Assisted Analysis Team",
+        source_urls: sourceUrls,
+        quality_score: qualityChecks.overallScore,
+        eeat_signals: eeatSignals,
       })
       .select()
       .single();
@@ -282,7 +507,8 @@ Requirements:
           title: insertedReport.title,
           slug: insertedReport.slug,
           category: insertedReport.category,
-          wordCount: wordCount,
+          wordCount: qualityChecks.wordCount.actual,
+          qualityScore: qualityChecks.overallScore,
         },
       }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }

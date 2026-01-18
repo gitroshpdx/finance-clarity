@@ -19,7 +19,9 @@ import {
   ExternalLink,
   AlertCircle,
   RefreshCw,
+  Eye,
 } from 'lucide-react';
+import { ArticlePreviewModal } from '@/components/admin/ArticlePreviewModal';
 
 interface PublishedArticle {
   id: string;
@@ -27,6 +29,37 @@ interface PublishedArticle {
   slug: string;
   category: string;
   wordCount: number;
+}
+
+interface QualityChecks {
+  wordCount: { min: number; actual: number; passed: boolean };
+  headingCount: { min: number; actual: number; passed: boolean };
+  dataPointCount: { min: number; actual: number; passed: boolean };
+  keyInsightCount: { min: number; actual: number; passed: boolean };
+  hasConclusion: boolean;
+  sourcesCited: { min: number; actual: number; passed: boolean };
+  overallScore: number;
+}
+
+interface EEATSignals {
+  sources_cited: number;
+  data_verification_date: string;
+  author_expertise_stated: boolean;
+  forward_looking_disclaimer: boolean;
+  methodology_included: boolean;
+}
+
+interface PreviewData {
+  title: string;
+  excerpt: string;
+  body: string;
+  tags: string[];
+  category: string;
+  slug: string;
+  wordCount: number;
+  sourceUrls: string[];
+  qualityChecks: QualityChecks;
+  eeatSignals: EEATSignals;
 }
 
 const categories = [
@@ -41,17 +74,21 @@ const categories = [
 ];
 
 export default function OneClickPublish() {
-  const [publishingCategory, setPublishingCategory] = useState<string | null>(null);
+  const [generatingCategory, setGeneratingCategory] = useState<string | null>(null);
   const [publishedArticles, setPublishedArticles] = useState<PublishedArticle[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [previewData, setPreviewData] = useState<PreviewData | null>(null);
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [isPublishing, setIsPublishing] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
-  const handlePublish = async (category: string) => {
-    setPublishingCategory(category);
+  const handleGenerate = async (category: string) => {
+    setGeneratingCategory(category);
     setError(null);
 
     toast.info(`Generating ${category} article...`, {
-      description: 'Scraping news and creating premium content',
-      duration: 30000,
+      description: 'Scraping unique content and creating EEAT-compliant article',
+      duration: 60000,
     });
 
     try {
@@ -63,7 +100,58 @@ export default function OneClickPublish() {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
           },
-          body: JSON.stringify({ category }),
+          body: JSON.stringify({ category, preview: true }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || 'Failed to generate article');
+      }
+
+      setPreviewData(data.data);
+      setIsPreviewOpen(true);
+      toast.success('Article generated!', {
+        description: `Quality Score: ${data.data.qualityChecks.overallScore}/100`,
+      });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Unknown error';
+      setError(message);
+      toast.error('Failed to generate', { description: message });
+    } finally {
+      setGeneratingCategory(null);
+    }
+  };
+
+  const handlePublish = async () => {
+    if (!previewData) return;
+    setIsPublishing(true);
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/one-click-publish`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+          },
+          body: JSON.stringify({
+            publishData: {
+              title: previewData.title,
+              slug: previewData.slug,
+              excerpt: previewData.excerpt,
+              body: previewData.body,
+              tags: previewData.tags,
+              category: previewData.category,
+              status: 'published',
+              wordCount: previewData.wordCount,
+              sourceUrls: previewData.sourceUrls,
+              qualityScore: previewData.qualityChecks.overallScore,
+              eeatSignals: previewData.eeatSignals,
+            },
+          }),
         }
       );
 
@@ -74,8 +162,10 @@ export default function OneClickPublish() {
       }
 
       setPublishedArticles((prev) => [data.article, ...prev]);
+      setIsPreviewOpen(false);
+      setPreviewData(null);
       toast.success(`Published: ${data.article.title}`, {
-        description: `${data.article.wordCount} words • ${category}`,
+        description: `${data.article.wordCount} words • ${previewData.category}`,
         action: {
           label: 'View',
           onClick: () => window.open(`/report/${data.article.slug}`, '_blank'),
@@ -83,20 +173,71 @@ export default function OneClickPublish() {
       });
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Unknown error';
-      setError(message);
       toast.error('Failed to publish', { description: message });
     } finally {
-      setPublishingCategory(null);
+      setIsPublishing(false);
     }
   };
 
-  const handlePublishAll = async () => {
-    for (const category of categories) {
-      if (publishingCategory) break;
-      await handlePublish(category.name);
-      // Small delay between publications to avoid rate limits
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+  const handleSaveDraft = async () => {
+    if (!previewData) return;
+    setIsSaving(true);
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/one-click-publish`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+          },
+          body: JSON.stringify({
+            publishData: {
+              title: previewData.title,
+              slug: previewData.slug,
+              excerpt: previewData.excerpt,
+              body: previewData.body,
+              tags: previewData.tags,
+              category: previewData.category,
+              status: 'draft',
+              wordCount: previewData.wordCount,
+              sourceUrls: previewData.sourceUrls,
+              qualityScore: previewData.qualityChecks.overallScore,
+              eeatSignals: previewData.eeatSignals,
+            },
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || 'Failed to save draft');
+      }
+
+      setIsPreviewOpen(false);
+      setPreviewData(null);
+      toast.success('Saved as draft', {
+        description: 'You can edit and publish it later from Reports.',
+        action: {
+          label: 'Edit',
+          onClick: () => window.open(`/admin/reports/${data.article.id}/edit`, '_blank'),
+        },
+      });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Unknown error';
+      toast.error('Failed to save draft', { description: message });
+    } finally {
+      setIsSaving(false);
     }
+  };
+
+  const handleRegenerate = () => {
+    if (!previewData) return;
+    setIsPreviewOpen(false);
+    setPreviewData(null);
+    handleGenerate(previewData.category);
   };
 
   return (
@@ -109,18 +250,9 @@ export default function OneClickPublish() {
             One-Click Publish
           </h1>
           <p className="text-muted-foreground mt-1">
-            Click a category to automatically scrape news and publish a premium article.
+            Generate EEAT-compliant articles with quality validation and preview before publishing.
           </p>
         </div>
-        <Button
-          variant="outline"
-          onClick={handlePublishAll}
-          disabled={publishingCategory !== null}
-          className="gap-2"
-        >
-          <RefreshCw className={`h-4 w-4 ${publishingCategory ? 'animate-spin' : ''}`} />
-          Publish All
-        </Button>
       </div>
 
       {/* Error Alert */}
@@ -145,27 +277,32 @@ export default function OneClickPublish() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {categories.map((category) => {
           const Icon = category.icon;
-          const isPublishing = publishingCategory === category.name;
-          const isDisabled = publishingCategory !== null;
+          const isGenerating = generatingCategory === category.name;
+          const isDisabled = generatingCategory !== null;
 
           return (
             <Card
               key={category.name}
               className={`cursor-pointer transition-all duration-200 ${
-                isDisabled && !isPublishing ? 'opacity-50' : ''
+                isDisabled && !isGenerating ? 'opacity-50' : ''
               } ${category.bgColor} border-2 border-transparent hover:border-primary/20`}
-              onClick={() => !isDisabled && handlePublish(category.name)}
+              onClick={() => !isDisabled && handleGenerate(category.name)}
             >
               <CardContent className="flex flex-col items-center justify-center py-8 gap-4">
-                {isPublishing ? (
+                {isGenerating ? (
                   <Loader2 className={`h-12 w-12 animate-spin ${category.color}`} />
                 ) : (
                   <Icon className={`h-12 w-12 ${category.color}`} />
                 )}
                 <span className="font-semibold text-lg">{category.name}</span>
-                {isPublishing && (
+                {isGenerating ? (
                   <Badge variant="secondary" className="animate-pulse">
                     Generating...
+                  </Badge>
+                ) : (
+                  <Badge variant="outline" className="gap-1">
+                    <Eye className="h-3 w-3" />
+                    Preview First
                   </Badge>
                 )}
               </CardContent>
@@ -223,19 +360,54 @@ export default function OneClickPublish() {
       {/* Instructions */}
       <Card className="bg-muted/30">
         <CardContent className="py-6">
-          <h3 className="font-semibold mb-2">How it works</h3>
+          <h3 className="font-semibold mb-2">Quality Controls & EEAT Compliance</h3>
           <ol className="list-decimal list-inside space-y-1 text-sm text-muted-foreground">
-            <li>Click any category button above</li>
-            <li>AI searches for the latest news from Reuters, Bloomberg, etc.</li>
-            <li>Scrapes and combines content from top 3 articles</li>
-            <li>Generates a premium 1500-2500 word analysis</li>
-            <li>Publishes directly to your site (no approval needed)</li>
+            <li>Click any category to generate an article</li>
+            <li>AI searches for fresh, unique content (excludes sources used in last 7 days)</li>
+            <li>Generates EEAT-compliant article with source citations & disclaimers</li>
+            <li>Preview shows quality score (minimum 70/100 to publish)</li>
+            <li>Review content, then Publish or Save as Draft</li>
           </ol>
-          <p className="mt-4 text-sm text-muted-foreground">
-            Each article takes approximately 30-60 seconds to generate.
-          </p>
+          <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3 text-sm">
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <CheckCircle2 className="h-4 w-4 text-primary" />
+              <span>Minimum 1500 words</span>
+            </div>
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <CheckCircle2 className="h-4 w-4 text-primary" />
+              <span>Duplicate source detection</span>
+            </div>
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <CheckCircle2 className="h-4 w-4 text-primary" />
+              <span>EEAT compliance signals</span>
+            </div>
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <CheckCircle2 className="h-4 w-4 text-primary" />
+              <span>Quality score validation</span>
+            </div>
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <CheckCircle2 className="h-4 w-4 text-primary" />
+              <span>Source attribution</span>
+            </div>
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <CheckCircle2 className="h-4 w-4 text-primary" />
+              <span>Forward-looking disclaimers</span>
+            </div>
+          </div>
         </CardContent>
       </Card>
+
+      {/* Preview Modal */}
+      <ArticlePreviewModal
+        open={isPreviewOpen}
+        onOpenChange={setIsPreviewOpen}
+        previewData={previewData}
+        onPublish={handlePublish}
+        onSaveDraft={handleSaveDraft}
+        onRegenerate={handleRegenerate}
+        isPublishing={isPublishing}
+        isSaving={isSaving}
+      />
     </div>
   );
 }
