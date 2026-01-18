@@ -13,6 +13,7 @@ import {
   Sun,
   FolderOpen,
   BarChart3,
+  Rocket,
   Zap,
 } from 'lucide-react';
 import {
@@ -43,6 +44,7 @@ const createNavItems = [
   { title: 'Create Report', url: '/admin/reports/new', icon: PenLine },
   { title: 'AI Generate', url: '/admin/reports/ai', icon: Sparkles },
   { title: 'Auto-Publish', url: '/admin/auto-publish', icon: Zap },
+  { title: 'One-Click', url: '/admin/one-click', icon: Rocket },
 ];
 
 
