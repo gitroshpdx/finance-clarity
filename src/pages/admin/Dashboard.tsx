@@ -4,6 +4,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { useSuperAdmin } from '@/hooks/useSuperAdmin';
 import { 
   FileText, 
   TrendingUp, 
@@ -42,6 +43,7 @@ export default function AdminDashboard() {
   });
   const [loading, setLoading] = useState(true);
   const [transforming, setTransforming] = useState(false);
+  const { isSuperAdmin } = useSuperAdmin();
 
   const handleTransformArticles = async () => {
     setTransforming(true);
@@ -230,24 +232,26 @@ export default function AdminDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="border-dashed hover:border-primary/50 transition-colors bg-gradient-to-br from-amber-500/5 to-transparent md:col-span-2">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Zap className="h-5 w-5 text-amber-500" />
-              One-Click Publish
-            </CardTitle>
-            <CardDescription>
-              Click a category to automatically scrape news, generate, and publish a premium article.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Button asChild className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white">
-              <Link to="/admin/one-click">
-                Open One-Click Publisher <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </CardContent>
-        </Card>
+        {isSuperAdmin && (
+          <Card className="border-dashed hover:border-primary/50 transition-colors bg-gradient-to-br from-amber-500/5 to-transparent md:col-span-2">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Zap className="h-5 w-5 text-amber-500" />
+                One-Click Publish
+              </CardTitle>
+              <CardDescription>
+                Click a category to automatically scrape news, generate, and publish a premium article.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button asChild className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white">
+                <Link to="/admin/one-click">
+                  Open One-Click Publisher <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </CardContent>
+          </Card>
+        )}
       </div>
 
       {/* Recent Reports */}

@@ -2,6 +2,7 @@ import { useLocation } from 'react-router-dom';
 import { NavLink } from '@/components/NavLink';
 import { useAuth } from '@/contexts/AuthContext';
 import { useTheme } from 'next-themes';
+import { useSuperAdmin } from '@/hooks/useSuperAdmin';
 import {
   LayoutDashboard,
   FileText,
@@ -40,9 +41,12 @@ const mainNavItems = [
   { title: 'Analytics', url: '/admin/analytics', icon: BarChart3 },
 ];
 
-const createNavItems = [
+const baseCreateNavItems = [
   { title: 'Create Report', url: '/admin/reports/new', icon: PenLine },
   { title: 'AI Generate', url: '/admin/reports/ai', icon: Sparkles },
+];
+
+const superAdminCreateNavItems = [
   { title: 'Auto-Publish', url: '/admin/auto-publish', icon: Zap },
   { title: 'One-Click', url: '/admin/one-click', icon: Rocket },
 ];
@@ -54,8 +58,14 @@ export function AdminSidebar() {
   const location = useLocation();
   const { signOut, user } = useAuth();
   const { theme, resolvedTheme, setTheme } = useTheme();
+  const { isSuperAdmin } = useSuperAdmin();
 
   const isDark = resolvedTheme === 'dark';
+  
+  // Combine create nav items based on super admin status
+  const createNavItems = isSuperAdmin 
+    ? [...baseCreateNavItems, ...superAdminCreateNavItems]
+    : baseCreateNavItems;
 
   const toggleTheme = () => {
     setTheme(isDark ? 'light' : 'dark');

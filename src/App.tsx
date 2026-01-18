@@ -7,6 +7,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ProtectedRoute } from "@/components/admin/ProtectedRoute";
+import { SuperAdminRoute } from "@/components/admin/SuperAdminRoute";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import Index from "./pages/Index";
 import Report from "./pages/Report";
@@ -57,8 +58,8 @@ const App = () => (
                   <Route path="reports/ai" element={<AIGenerateReport />} />
                   <Route path="categories" element={<Categories />} />
                   <Route path="analytics" element={<Analytics />} />
-                  <Route path="auto-publish" element={<AutoPublish />} />
-                  <Route path="one-click" element={<OneClickPublish />} />
+                  <Route path="auto-publish" element={<SuperAdminRoute><AutoPublish /></SuperAdminRoute>} />
+                  <Route path="one-click" element={<SuperAdminRoute><OneClickPublish /></SuperAdminRoute>} />
                 </Route>
                 
                 <Route path="*" element={<NotFound />} />
