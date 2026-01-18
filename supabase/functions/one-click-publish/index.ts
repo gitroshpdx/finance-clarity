@@ -441,13 +441,28 @@ Today's date for data verification: ${new Date().toLocaleDateString('en-US', { y
     
     console.log(`Quality score: ${qualityChecks.overallScore}/100`);
 
-    // Step 7: Generate slug
-    const slug = article.title
+    // Step 7: Generate clean slug without random suffix
+    const baseSlug = article.title
       .toLowerCase()
       .replace(/[^a-z0-9\s-]/g, "")
       .replace(/\s+/g, "-")
       .replace(/-+/g, "-")
-      .substring(0, 80) + "-" + Date.now().toString(36);
+      .replace(/^-+|-+$/g, "") // Trim leading/trailing dashes
+      .substring(0, 100);
+
+    // Check if slug already exists in database
+    const { data: existingSlugs } = await supabase
+      .from("reports")
+      .select("slug")
+      .like("slug", `${baseSlug}%`);
+
+    let slug = baseSlug;
+    if (existingSlugs && existingSlugs.length > 0) {
+      // Add numeric suffix if duplicate exists
+      slug = `${baseSlug}-${existingSlugs.length + 1}`;
+    }
+    
+    console.log(`Generated slug: ${slug}`);
 
     // Step 8: Return preview data or publish directly
     if (preview) {
