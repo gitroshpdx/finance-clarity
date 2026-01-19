@@ -14,6 +14,7 @@ import {
   Sun,
   FolderOpen,
   BarChart3,
+  Users,
   Rocket,
   Zap,
 } from 'lucide-react';
@@ -38,6 +39,7 @@ const mainNavItems = [
   { title: 'Dashboard', url: '/admin', icon: LayoutDashboard },
   { title: 'All Reports', url: '/admin/reports', icon: FileText },
   { title: 'Categories', url: '/admin/categories', icon: FolderOpen },
+  { title: 'Subscribers', url: '/admin/subscribers', icon: Users },
   { title: 'Analytics', url: '/admin/analytics', icon: BarChart3 },
 ];
 

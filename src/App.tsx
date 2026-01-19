@@ -28,6 +28,7 @@ import Categories from "./pages/admin/Categories";
 import Analytics from "./pages/admin/Analytics";
 import AutoPublish from "./pages/admin/AutoPublish";
 import OneClickPublish from "./pages/admin/OneClickPublish";
+import Subscribers from "./pages/admin/Subscribers";
 
 const queryClient = new QueryClient();
 
@@ -60,6 +61,7 @@ const App = () => (
                   <Route path="reports/ai" element={<AIGenerateReport />} />
                   <Route path="categories" element={<Categories />} />
                   <Route path="analytics" element={<Analytics />} />
+                  <Route path="subscribers" element={<Subscribers />} />
                   <Route path="auto-publish" element={<SuperAdminRoute><AutoPublish /></SuperAdminRoute>} />
                   <Route path="one-click" element={<SuperAdminRoute><OneClickPublish /></SuperAdminRoute>} />
                 </Route>
