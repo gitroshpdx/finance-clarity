@@ -3,25 +3,52 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Check, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 const Newsletter = () => {
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
     
     setIsLoading(true);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    const { error } = await supabase
+      .from('newsletter_subscribers')
+      .insert({ email: email.toLowerCase().trim() });
+
     setIsLoading(false);
+
+    if (error) {
+      if (error.code === '23505') {
+        toast({
+          title: 'Already Subscribed',
+          description: 'This email is already on our list!',
+        });
+      } else {
+        toast({
+          title: 'Error',
+          description: 'Could not subscribe. Please try again.',
+          variant: 'destructive',
+        });
+      }
+      return;
+    }
+
     setIsSubmitted(true);
+    toast({
+      title: 'Welcome!',
+      description: 'You\'ve been successfully subscribed.',
+    });
   };
 
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden">
+    <section id="newsletter" className="relative py-24 md:py-32 overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-3xl" />

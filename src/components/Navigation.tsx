@@ -120,6 +120,13 @@ const Navigation = () => {
               >
                 About
               </Link>
+
+              <Link
+                to="/contact"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Contact
+              </Link>
               
               {/* Theme Toggle */}
               <ThemeToggle />
@@ -129,6 +136,7 @@ const Navigation = () => {
             <div className="hidden md:block">
               <Button
                 className="bg-gradient-primary text-primary-foreground hover:opacity-90 transition-opacity font-medium px-6"
+                onClick={() => document.getElementById('newsletter')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Subscribe
               </Button>
@@ -213,13 +221,26 @@ const Navigation = () => {
                 >
                   About
                 </Link>
+
+                <Link
+                  to="/contact"
+                  className="text-lg font-medium hover:text-primary transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Contact
+                </Link>
                 
                 {/* Mobile Theme Toggle */}
                 <ThemeToggle variant="mobile" />
                 
                 <Button
                   className="bg-gradient-primary text-primary-foreground w-full mt-4"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setTimeout(() => {
+                      document.getElementById('newsletter')?.scrollIntoView({ behavior: 'smooth' });
+                    }, 300);
+                  }}
                 >
                   Subscribe
                 </Button>

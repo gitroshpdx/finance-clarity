@@ -179,7 +179,7 @@ const PrivacyPolicy = () => {
                 please contact us at:
               </p>
               <p className="text-foreground mt-3">
-                <strong>Email:</strong> privacy@apexintelstream.com
+                <strong>Email:</strong> macrofinancereport@gmail.com
               </p>
             </section>
           </motion.div>

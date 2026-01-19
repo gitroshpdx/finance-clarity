@@ -191,7 +191,7 @@ const TermsAndConditions = () => {
                 If you have any questions about these Terms and Conditions, please contact us at:
               </p>
               <p className="text-foreground mt-3">
-                <strong>Email:</strong> legal@apexintelstream.com
+                <strong>Email:</strong> macrofinancereport@gmail.com
               </p>
             </section>
           </motion.div>

@@ -1,7 +1,12 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import AnimatedBackground from './AnimatedBackground';
+
+const scrollToNewsletter = () => {
+  document.getElementById('newsletter')?.scrollIntoView({ behavior: 'smooth' });
+};
 
 const Hero = () => {
   return (
@@ -54,6 +59,7 @@ const Hero = () => {
           >
             <Button
               size="lg"
+              onClick={scrollToNewsletter}
               className="bg-gradient-primary text-primary-foreground hover:opacity-90 transition-all font-medium px-8 py-6 text-base group"
             >
               Subscribe for Daily Clarity
@@ -64,8 +70,9 @@ const Hero = () => {
               variant="ghost"
               size="lg"
               className="text-muted-foreground hover:text-foreground px-8 py-6 text-base"
+              asChild
             >
-              Explore Reports
+              <Link to="/reports">Explore Reports</Link>
             </Button>
           </motion.div>
 
