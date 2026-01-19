@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
+import { useCategories } from '@/hooks/useCategories';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -16,17 +17,6 @@ import {
 } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { ArrowLeft, Loader2, Sparkles, Save, Wand2 } from 'lucide-react';
-
-const CATEGORIES = [
-  'Markets',
-  'Economy',
-  'Technology',
-  'Central Banks',
-  'Commodities',
-  'Geopolitics',
-  'Real Estate',
-  'Crypto',
-];
 
 export default function AIGenerateReport() {
   const [topic, setTopic] = useState('');
@@ -47,6 +37,7 @@ export default function AIGenerateReport() {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { user } = useAuth();
+  const { data: categories } = useCategories();
 
   const handleGenerate = async () => {
     if (!topic || !category) {
@@ -295,9 +286,9 @@ export default function AIGenerateReport() {
                     <SelectValue placeholder="Select category" />
                   </SelectTrigger>
                   <SelectContent>
-                    {CATEGORIES.map((cat) => (
-                      <SelectItem key={cat} value={cat}>
-                        {cat}
+                    {categories?.map((cat) => (
+                      <SelectItem key={cat.id} value={cat.name}>
+                        {cat.name}
                       </SelectItem>
                     ))}
                   </SelectContent>
