@@ -70,12 +70,6 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://macrofinancereport.com/reports?category=policy</loc>
-    <lastmod>2026-01-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://macrofinancereport.com/reports?category=real-estate</loc>
     <lastmod>2026-01-18</lastmod>
     <changefreq>weekly</changefreq>
