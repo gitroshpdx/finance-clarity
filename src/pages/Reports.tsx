@@ -26,9 +26,13 @@ const Reports = () => {
   const filteredReports = useMemo(() => {
     if (!reports) return [];
     if (!categorySlug) return reports;
-    return reports.filter(report => 
-      report.category.toLowerCase() === categorySlug.toLowerCase()
-    );
+    return reports.filter(report => {
+      const reportCategorySlug = report.category
+        .toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/&/g, 'and');
+      return reportCategorySlug === categorySlug.toLowerCase();
+    });
   }, [reports, categorySlug]);
 
   const structuredData = {
