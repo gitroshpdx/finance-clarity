@@ -155,62 +155,6 @@ const ShareActions = ({ title }: ShareActionsProps) => {
         </div>
       </motion.aside>
 
-      {/* Mobile - Fixed bottom bar */}
-      <motion.div
-        initial={{ y: 100 }}
-        animate={{ y: 0 }}
-        transition={{ delay: 0.4, type: 'spring', stiffness: 300 }}
-        className="lg:hidden fixed bottom-0 left-0 right-0 z-40 glass-card border-t border-primary/10 px-6 py-3"
-      >
-        <div className="flex items-center justify-around">
-          {shareLinks.map((link) => (
-            <motion.a
-              key={link.name}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full bg-muted/50 flex items-center justify-center text-muted-foreground hover:text-primary transition-colors"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              aria-label={`Share on ${link.name}`}
-            >
-              <link.icon className="w-5 h-5" />
-            </motion.a>
-          ))}
-          
-          <motion.button
-            onClick={() => setIsBookmarked(!isBookmarked)}
-            className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
-              isBookmarked 
-                ? 'bg-primary/20 text-primary' 
-                : 'bg-muted/50 text-muted-foreground'
-            }`}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            aria-label="Bookmark"
-          >
-            {isBookmarked ? (
-              <BookmarkCheck className="w-5 h-5" />
-            ) : (
-              <Bookmark className="w-5 h-5" />
-            )}
-          </motion.button>
-
-          <motion.button
-            onClick={copyToClipboard}
-            className="w-10 h-10 rounded-full bg-muted/50 flex items-center justify-center text-muted-foreground hover:text-primary transition-colors"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            aria-label="Copy link"
-          >
-            {isCopied ? (
-              <Check className="w-5 h-5 text-primary" />
-            ) : (
-              <Link className="w-5 h-5" />
-            )}
-          </motion.button>
-        </div>
-      </motion.div>
     </>
   );
 };
