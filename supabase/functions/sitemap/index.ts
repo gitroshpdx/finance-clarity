@@ -45,6 +45,7 @@ Deno.serve(async (req) => {
       { loc: '/', priority: '1.0', changefreq: 'daily', lastmod: today },
       { loc: '/reports', priority: '0.9', changefreq: 'daily', lastmod: today },
       { loc: '/about', priority: '0.7', changefreq: 'monthly', lastmod: today },
+      { loc: '/contact', priority: '0.7', changefreq: 'monthly', lastmod: today },
       { loc: '/disclaimer', priority: '0.5', changefreq: 'yearly', lastmod: today },
       { loc: '/privacy', priority: '0.5', changefreq: 'yearly', lastmod: today },
       { loc: '/terms', priority: '0.5', changefreq: 'yearly', lastmod: today },

@@ -3,92 +3,218 @@
   <!-- Static Pages -->
   <url>
     <loc>https://macrofinancereport.com/</loc>
-    <lastmod>2026-01-18</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://macrofinancereport.com/reports</loc>
-    <lastmod>2026-01-18</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://macrofinancereport.com/about</loc>
-    <lastmod>2026-01-18</lastmod>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/contact</loc>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://macrofinancereport.com/disclaimer</loc>
-    <lastmod>2026-01-18</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://macrofinancereport.com/privacy</loc>
-    <lastmod>2026-01-18</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://macrofinancereport.com/terms</loc>
-    <lastmod>2026-01-19</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/contact</loc>
-    <lastmod>2026-01-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
 
   <!-- Category Pages -->
   <url>
     <loc>https://macrofinancereport.com/reports?category=banking</loc>
-    <lastmod>2026-01-18</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://macrofinancereport.com/reports?category=commodities</loc>
-    <lastmod>2026-01-18</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://macrofinancereport.com/reports?category=crypto</loc>
-    <lastmod>2026-01-18</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://macrofinancereport.com/reports?category=economy</loc>
-    <lastmod>2026-01-18</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://macrofinancereport.com/reports?category=markets</loc>
-    <lastmod>2026-01-18</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://macrofinancereport.com/reports?category=real-estate</loc>
-    <lastmod>2026-01-18</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://macrofinancereport.com/reports?category=technology</loc>
-    <lastmod>2026-01-18</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- Report Pages (35 articles) -->
+  <!-- Report Pages (56 published reports) -->
+  <url>
+    <loc>https://macrofinancereport.com/report/the-silicon-ultimatum-quantifying-the-anxiety-of-the-al-augmented-global-workforce</loc>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-digital-renaissance-msme-lending-crosses-52-300-cr-milestone-under-public-sector-digital-credit-models</loc>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-divergence-asia-and-europe-lead-the-global-real-estate-recovery</loc>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/budget-2026-real-estate-sector-seeks-reforms-on-housing-green-policy</loc>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-reversal-of-euphoria-xrp-breaches-2-support-as-leveraged-longs-face-29-7m-liquidation</loc>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/regulatory-hardening-assessing-the-impact-of-rbi-s-mandatory-auditor-certification-on-priority-sector-lending</loc>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-digital-imperative-analyzing-lloyds-banking-group-s-strategic-pivot-and-the-erosion-of-the-high-street</loc>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-silent-ledger-systemic-implications-of-the-mlk-day-banking-moratorium</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-resupply-paradox-uk-housing-inventory-hits-8-year-high-amidst-interest-rate-fragility</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-houston-pivot-supply-surges-and-the-shift-toward-a-buyer-centric-2026-market</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-consolidation-tsunami-navigating-the-compass-anywhere-mega-merger</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/digital-gold-vs-geopolitical-friction-assessing-the-crypto-liquidation-in-the-wake-of-trade-escalation</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/digital-deleveraging-inside-the-680m-liquidation-cascade</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-de-leveraging-macro-headwinds-and-liquidity-voids-trigger-crypto-major-sell-off</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/capital-discipline-vs-growth-narratives-the-new-earnings-divide</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/index-concentration-risk-when-passive-investing-becomes-a-macro-threat</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/liquidity-without-stimulus-the-quiet-tools-central-banks-still-control</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-architecture-of-evasion-sanctions-arbitrage-and-the-rise-of-shadow-capital-flows</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-divergence-navigating-emerging-market-debt-fragility-in-a-high-rate-era</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-silver-squeeze-2-0-assessing-the-fundamental-deficit-and-industrial-super-cycle</loc>
+    <lastmod>2026-01-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-callous-rally-decoding-high-stakes-geopolitics-and-the-5000-gold-path</loc>
+    <lastmod>2026-01-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
     <loc>https://macrofinancereport.com/report/commodity-cycles-in-a-fragmented-world-energy-rare-earths-and-resilience-finance</loc>
     <lastmod>2026-01-18</lastmod>
@@ -271,31 +397,31 @@
   </url>
   <url>
     <loc>https://macrofinancereport.com/report/the-balancing-act-navigating-fiscal-math-and-national-growth-strategies</loc>
-    <lastmod>2026-01-15</lastmod>
+    <lastmod>2026-01-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://macrofinancereport.com/report/the-institutional-ascent-of-au-small-finance-bank-a-blueprint-for-strategic-partnerships-and-discipline</loc>
-    <lastmod>2026-01-15</lastmod>
+    <lastmod>2026-01-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://macrofinancereport.com/report/market-volatility-and-metal-surges-analyzing-the-impact-of-us-tariffs-and-sector-rotation</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-01-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://macrofinancereport.com/report/fixed-income-strategy-2026-navigating-the-long-pause-and-the-shift-to-accrual</loc>
-    <lastmod>2026-01-14</lastmod>
+    <lastmod>2026-01-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://macrofinancereport.com/report/the-indian-macro-loop-why-domestic-buying-is-pressuring-the-rupee-and-shifting-equity-strategies</loc>
-    <lastmod>2026-01-13</lastmod>
+    <lastmod>2026-01-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
