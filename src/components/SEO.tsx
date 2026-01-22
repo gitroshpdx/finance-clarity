@@ -45,6 +45,11 @@ const SEO = ({
       <meta name="description" content={description} />
       <link rel="canonical" href={canonicalUrl} />
       {noindex && <meta name="robots" content="noindex, nofollow" />}
+      
+      {/* Additional SEO hints */}
+      <meta name="language" content="English" />
+      <meta name="revisit-after" content="1 days" />
+      <meta name="rating" content="General" />
 
       {/* Open Graph */}
       <meta property="og:site_name" content={SITE_NAME} />
@@ -55,6 +60,7 @@ const SEO = ({
       <meta property="og:image" content={imageUrl} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
+      <meta property="og:locale" content="en_US" />
 
       {/* Article specific */}
       {type === 'article' && publishedTime && (

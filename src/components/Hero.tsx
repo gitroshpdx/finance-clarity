@@ -3,12 +3,21 @@ import { ArrowRight, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import AnimatedBackground from './AnimatedBackground';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const scrollToNewsletter = () => {
   document.getElementById('newsletter')?.scrollIntoView({ behavior: 'smooth' });
 };
 
 const Hero = () => {
+  const isMobile = useIsMobile();
+  
+  // Simplified animation variants for mobile
+  const fadeUp = {
+    initial: { opacity: 0, y: isMobile ? 10 : 20 },
+    animate: { opacity: 1, y: 0 },
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <AnimatedBackground />
@@ -17,9 +26,8 @@ const Hero = () => {
         <div className="max-w-4xl mx-auto text-center space-y-8">
           {/* Badge */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            {...fadeUp}
+            transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card"
           >
             <Sparkles className="w-4 h-4 text-primary" />
@@ -30,9 +38,8 @@ const Hero = () => {
 
           {/* Headline */}
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
+            {...fadeUp}
+            transition={{ duration: 0.5, delay: 0.1 }}
             className="text-display-lg md:text-display-xl font-sans text-balance"
           >
             The world's most important finance,{' '}
@@ -41,9 +48,8 @@ const Hero = () => {
 
           {/* Subheadline */}
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
+            {...fadeUp}
+            transition={{ duration: 0.5, delay: 0.15 }}
             className="text-xl md:text-2xl text-muted-foreground font-light max-w-2xl mx-auto leading-relaxed"
           >
             Complex macroeconomics, markets, and geopolitics distilled into 
@@ -52,9 +58,8 @@ const Hero = () => {
 
           {/* CTA Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
+            {...fadeUp}
+            transition={{ duration: 0.5, delay: 0.2 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
           >
             <Button
@@ -80,32 +85,34 @@ const Hero = () => {
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.7, delay: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
             className="text-sm text-muted-foreground/60 pt-8"
           >
             Trusted by 50,000+ global decision-makers
           </motion.p>
         </div>
 
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 0.5 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        >
+        {/* Scroll Indicator - Hidden on mobile for cleaner UX */}
+        {!isMobile && (
           <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex items-start justify-center p-2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+            className="absolute bottom-8 left-1/2 -translate-x-1/2"
           >
             <motion.div
-              animate={{ opacity: [0.3, 1, 0.3], y: [0, 8, 0] }}
+              animate={{ y: [0, 8, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-              className="w-1 h-2 rounded-full bg-primary"
-            />
+              className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex items-start justify-center p-2"
+            >
+              <motion.div
+                animate={{ opacity: [0.3, 1, 0.3], y: [0, 8, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                className="w-1 h-2 rounded-full bg-primary"
+              />
+            </motion.div>
           </motion.div>
-        </motion.div>
+        )}
       </div>
     </section>
   );
