@@ -6,7 +6,8 @@
    Deep midnight navy base with emerald-teal accents
    All colors in HSL for proper theming */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Literata:ital,opsz,wght@0,7..72,300;0,7..72,400;0,7..72,500;0,7..72,600;0,7..72,700;1,7..72,400;1,7..72,500&family=JetBrains+Mono:wght@400;500;600&display=swap');
+/* Optimized font loading - reduced weights for performance */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600;7..72,700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @layer base {
   :root {

@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface Particle {
   x: number;
@@ -10,7 +11,32 @@ interface Particle {
   opacity: number;
 }
 
-const AnimatedBackground = () => {
+// Lightweight CSS-only background for mobile
+const MobileBackground = () => (
+  <div className="absolute inset-0 overflow-hidden">
+    {/* Simple gradient overlay */}
+    <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
+    
+    {/* Static ambient glow - no animation for performance */}
+    <div 
+      className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full opacity-50"
+      style={{
+        background: 'radial-gradient(circle, hsla(168, 85%, 40%, 0.06) 0%, transparent 70%)',
+      }}
+    />
+    
+    {/* Secondary static glow */}
+    <div 
+      className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full"
+      style={{
+        background: 'radial-gradient(circle, hsla(160, 84%, 50%, 0.04) 0%, transparent 70%)',
+      }}
+    />
+  </div>
+);
+
+// Full animated background for desktop only
+const DesktopBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const animationRef = useRef<number>();
@@ -29,7 +55,8 @@ const AnimatedBackground = () => {
     };
 
     const initParticles = () => {
-      const particleCount = Math.floor((window.innerWidth * window.innerHeight) / 15000);
+      // Reduced particle count for better performance
+      const particleCount = Math.min(Math.floor((window.innerWidth * window.innerHeight) / 25000), 50);
       particlesRef.current = Array.from({ length: particleCount }, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
@@ -43,7 +70,6 @@ const AnimatedBackground = () => {
     const drawParticle = (particle: Particle) => {
       if (!ctx) return;
       
-      // Emerald-teal color
       ctx.beginPath();
       ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
       ctx.fillStyle = `hsla(168, 85%, 40%, ${particle.opacity})`;
@@ -54,7 +80,7 @@ const AnimatedBackground = () => {
       if (!ctx) return;
       
       const particles = particlesRef.current;
-      const connectionDistance = 150;
+      const connectionDistance = 120;
 
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
@@ -63,7 +89,7 @@ const AnimatedBackground = () => {
           const distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < connectionDistance) {
-            const opacity = (1 - distance / connectionDistance) * 0.15;
+            const opacity = (1 - distance / connectionDistance) * 0.12;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -79,7 +105,6 @@ const AnimatedBackground = () => {
       const particles = particlesRef.current;
       
       particles.forEach((particle) => {
-        // Subtle mouse influence
         const dx = mouseRef.current.x - particle.x;
         const dy = mouseRef.current.y - particle.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
@@ -90,15 +115,12 @@ const AnimatedBackground = () => {
           particle.vy += dy * force * 0.01;
         }
 
-        // Update position
         particle.x += particle.vx;
         particle.y += particle.vy;
 
-        // Apply friction
         particle.vx *= 0.99;
         particle.vy *= 0.99;
 
-        // Wrap around edges
         if (particle.x < 0) particle.x = canvas.width;
         if (particle.x > canvas.width) particle.x = 0;
         if (particle.y < 0) particle.y = canvas.height;
@@ -143,10 +165,8 @@ const AnimatedBackground = () => {
 
   return (
     <div className="absolute inset-0 overflow-hidden">
-      {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
       
-      {/* Radial glow */}
       <motion.div
         className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full"
         style={{
@@ -163,13 +183,11 @@ const AnimatedBackground = () => {
         }}
       />
       
-      {/* Particle canvas */}
       <canvas
         ref={canvasRef}
         className="absolute inset-0 opacity-60"
       />
       
-      {/* Secondary glow */}
       <motion.div
         className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full"
         style={{
@@ -187,6 +205,27 @@ const AnimatedBackground = () => {
       />
     </div>
   );
+};
+
+const AnimatedBackground = () => {
+  const isMobile = useIsMobile();
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+    
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
+  // Use lightweight background for mobile or reduced motion preference
+  if (isMobile || prefersReducedMotion) {
+    return <MobileBackground />;
+  }
+
+  return <DesktopBackground />;
 };
 
 export default AnimatedBackground;
