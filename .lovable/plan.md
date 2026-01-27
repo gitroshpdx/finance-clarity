@@ -1,179 +1,117 @@
 
 
-# Mobile Optimization and SEO Indexing Improvement Plan
+# Update Sitemap with 111 Published Reports
 
-## Current State Analysis
+## Current State
 
-After reviewing the codebase, I've identified several areas that impact mobile performance and indexing:
+| Metric | Current Sitemap | Database |
+|--------|-----------------|----------|
+| Published Reports | 56 | **111** |
+| Categories | 7 | 7 |
+| Last Updated | 2026-01-20 | 2026-01-27 |
 
-| Issue | Impact | Priority |
-|-------|--------|----------|
-| Heavy canvas particle animation runs on all devices | Drains battery, slows rendering on mobile | High |
-| Framer Motion animations everywhere (60+ instances) | Increases JS bundle, causes layout shifts | High |
-| Google Fonts loaded via CSS @import (blocking) | Delays First Contentful Paint | High |
-| Missing critical SEO meta tags | Hurts mobile-first indexing | Medium |
-| No lazy loading for below-fold content | Slows initial load | Medium |
-| Missing web.dev performance hints | Affects Core Web Vitals | Medium |
+You have **55 new reports** that are missing from your sitemap! This is hurting your SEO indexing as Google doesn't know about half your content.
 
 ---
 
-## Phase 1: Lightweight Mobile-First Animations
+## What I'll Do
 
-### 1.1 Replace Heavy Canvas Background on Mobile
+### 1. Update `public/sitemap.xml`
 
-**File: `src/components/AnimatedBackground.tsx`**
+Generate a complete sitemap with:
+- 7 static pages (home, reports, about, contact, disclaimer, privacy, terms)
+- 7 category pages  
+- **111 report pages** with accurate `lastmod` dates from the database
 
-The particle system with connection lines runs continuously and is CPU-intensive. We'll:
-- Detect mobile devices and disable the canvas animation entirely
-- Show a simple CSS gradient with subtle ambient animation instead
-- Keep the full animation only for desktop users
+### 2. New Reports to Add (55 articles)
 
-**Changes:**
-- Add `useIsMobile()` hook to detect mobile
-- Render lightweight CSS-only gradient for mobile
-- Reduce particle count even on desktop (currently ~100+ particles)
+Here are the newest reports missing from the sitemap:
 
-### 1.2 Simplify Hero Animations on Mobile
-
-**File: `src/components/Hero.tsx`**
-
-- Remove scroll indicator animation on mobile (unnecessary)
-- Reduce animation complexity with `reduced-motion` media query support
-- Use CSS transforms instead of Framer Motion where possible
-
----
-
-## Phase 2: Critical Performance Improvements
-
-### 2.1 Optimize Font Loading
-
-**File: `index.html`**
-
-Add preload hints for critical fonts:
-```html
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
-```
-
-**File: `src/index.css`**
-
-- Add `font-display: swap` to prevent invisible text
-- Reduce font weights loaded (currently loading 9 weights!)
-
-### 2.2 Add Critical SEO Meta Tags
-
-**File: `index.html`**
-
-Add mobile-specific and performance hints:
-```html
-<!-- Mobile optimization -->
-<meta name="theme-color" content="#0a0f1a" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#f5f7fa" media="(prefers-color-scheme: light)">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-
-<!-- Performance hints -->
-<link rel="dns-prefetch" href="https://fonts.googleapis.com">
-<link rel="dns-prefetch" href="https://cqivqqhshxetmecpzcsr.supabase.co">
-
-<!-- Crawl efficiency -->
-<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-<meta name="bingbot" content="index, follow">
-```
-
----
-
-## Phase 3: Component-Level Optimizations
-
-### 3.1 Lazy Load Below-Fold Components
-
-**File: `src/pages/Index.tsx`**
-
-Use React.lazy() for components below the fold:
-```tsx
-const LatestReports = React.lazy(() => import('@/components/LatestReports'));
-const Newsletter = React.lazy(() => import('@/components/Newsletter'));
-const Footer = React.lazy(() => import('@/components/Footer'));
-```
-
-### 3.2 Optimize ReportCard Animations
-
-**File: `src/components/ReportCard.tsx`**
-
-- Remove complex `whileHover` animations on mobile
-- Reduce `whileInView` to simple fade-in
-- Remove decorative blur elements on mobile (4 blurred divs per card!)
-
-### 3.3 Respect Reduced Motion Preferences
-
-**File: `src/components/Hero.tsx`, `src/components/ReportCard.tsx`, etc.**
-
-Add `prefers-reduced-motion` support:
-```tsx
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-// Skip animations if user prefers reduced motion
-```
-
----
-
-## Phase 4: SEO Indexing Enhancements
-
-### 4.1 Add robots.txt Improvements
-
-**File: `public/robots.txt`** (verify current content)
-
-Ensure proper crawl directives:
-```
-User-agent: *
-Allow: /
-Sitemap: https://macrofinancereport.com/sitemap.xml
-
-# Disallow admin routes
-Disallow: /admin/
-```
-
-### 4.2 Enhance SEO Component
-
-**File: `src/components/SEO.tsx`**
-
-Add additional indexing hints:
-- Add `revisit-after` meta tag
-- Add `rating` meta tag (General)
-- Add proper `language` meta tag
-
----
-
-## Summary of Changes
-
-| File | Change |
+| Date | Report |
 |------|--------|
-| `index.html` | Add mobile meta tags, font preloading, dns-prefetch, crawl hints |
-| `src/index.css` | Reduce font weights, optimize font loading |
-| `src/components/AnimatedBackground.tsx` | Disable canvas on mobile, show CSS gradient |
-| `src/components/Hero.tsx` | Simplify animations, add reduced-motion support |
-| `src/components/ReportCard.tsx` | Remove decorative blurs on mobile, simplify hover |
-| `src/pages/Index.tsx` | Add React.lazy for below-fold components |
-| `src/components/SEO.tsx` | Add additional indexing meta tags |
-| `public/robots.txt` | Verify and update crawl rules |
+| Jan 27 | the-great-recalibration-institutional-real-estate-capital-markets-through-2026 |
+| Jan 27 | the-re-institutionalization-of-neom-adjacent-capital-al-saedan-s-sar-1-5bn-strategic-pivot |
+| Jan 27 | the-silicon-sand-rush-mubadala-lead-in-signals-institutional-pivot-to-mena-proptech |
+| Jan 27 | the-shadow-banking-sentinel-navigating-the-boe-s-mandate-for-non-bank-resilience |
+| Jan 27 | the-alpine-fortress-why-switzerland-s-wealth-management-dominance-remains-unassailable |
+| Jan 27 | the-great-unwinding-jgb-volatility-and-the-global-liquidity-re-rating |
+| Jan 27 | gold-s-ascent-to-5-000-the-new-paradigm-of-permanent-risk |
+| Jan 27 | institutionalizing-alpha-galaxy-digital-s-100m-pivot-into-crypto-hedge-fund-management |
+| Jan 27 | the-photolithographic-moat-asml-s-imperative-dominance-in-the-ai-era |
+| Jan 27 | the-midnight-exchange-nyse-s-pivot-to-24-7-tokenized-trading-and-the-end-of-market-closures |
+| Jan 26 | the-great-silent-deleveraging-china-s-rural-bank-foreclosure-crisis |
+| Jan 26 | the-persistence-of-prestige-institutional-resilience-in-global-office-markets |
+| Jan 26 | the-great-deceleration-navigating-the-luxury-market-s-transition-to-quiet-compounding |
+| Jan 26 | the-structural-impasse-analyzing-the-federal-response-to-the-u-s-housing-affordability-crisis |
+| Jan 25 | the-saffron-bull-assessing-indian-demand-aggression-in-global-commodity-markets |
+| Jan 25 | the-silicon-moat-nasdaq-s-resilient-path-amidst-macroeconomic-headwinds |
+| Jan 25 | resilience-amidst-protectionism-why-asian-fx-markets-are-positioned-to-weather-the-impending-trade-storm |
+| Jan 25 | the-great-rotation-defensive-moats-in-commodities-and-fixed-income |
+| Jan 25 | the-silicon-shield-and-the-greenback-analyzing-taiwan-s-fx-resilience-amid-u-s-trade-realignments |
+| Jan 24 | s-p-500-at-6916-the-calculus-of-valuation-in-a-high-plateau-economy |
+| ... | *(and 35 more from Jan 21-24)* |
 
 ---
 
-## Expected Improvements
+## Technical Details
 
-| Metric | Before | After (Expected) |
-|--------|--------|------------------|
-| Mobile Lighthouse Score | ~60-70 | 85+ |
-| First Contentful Paint | ~2.5s | ~1.2s |
-| Time to Interactive | ~4s | ~2s |
-| Cumulative Layout Shift | ~0.15 | ~0.05 |
-| Google Mobile Indexing | Slow | Fast |
+### File: `public/sitemap.xml`
+
+The updated sitemap will contain:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- 7 Static Pages -->
+  <url>
+    <loc>https://macrofinancereport.com/</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <!-- ... 6 more static pages -->
+  
+  <!-- 7 Category Pages -->
+  <url>
+    <loc>https://macrofinancereport.com/reports?category=banking</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- ... 6 more categories -->
+  
+  <!-- 111 Report Pages -->
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-recalibration-institutional-real-estate-capital-markets-through-2026</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- ... 110 more reports -->
+</urlset>
+```
 
 ---
 
-## Technical Notes
+## SEO Impact
 
-- All changes maintain the premium visual aesthetic on desktop
-- Mobile users get a lighter, faster experience without compromising quality
-- Reduced motion preferences are respected for accessibility
-- No breaking changes to existing functionality
+| Before | After |
+|--------|-------|
+| 56 reports indexed | **111 reports indexed** |
+| Outdated lastmod dates | Fresh dates (today) |
+| Missing new content | Complete coverage |
+
+Google will now discover and index all your new reports on the next crawl cycle.
+
+---
+
+## Summary
+
+| Action | Details |
+|--------|---------|
+| File to update | `public/sitemap.xml` |
+| Static pages | 7 (unchanged) |
+| Category pages | 7 (unchanged) |
+| Report pages | 56 → **111** (+55 new) |
+| All lastmod dates | Updated to actual values |
 
