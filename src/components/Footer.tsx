@@ -26,6 +26,19 @@ const Footer = () => {
             </p>
           </div>
 
+          {/* Topics */}
+          <div className="space-y-4">
+            <h4 className="font-medium text-foreground">Topics</h4>
+            <nav className="flex flex-col gap-3">
+              <Link to="/reports?category=technology" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                Technology
+              </Link>
+              <Link to="/reports?category=real-estate" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                Real Estate
+              </Link>
+            </nav>
+          </div>
+
           {/* Platform Links */}
           <div className="space-y-4">
             <h4 className="font-medium text-foreground">Platform</h4>
@@ -38,9 +51,6 @@ const Footer = () => {
               </Link>
               <Link to="/contact" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                 Contact
-              </Link>
-              <Link to="/disclaimer" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                Disclaimer
               </Link>
             </nav>
           </div>

@@ -16,6 +16,11 @@ const Navigation = () => {
 
   const { data: categories } = useCategories();
 
+  // Filter categories for dropdown - exclude Technology and Real Estate (shown in footer)
+  const dropdownCategories = categories?.filter(cat => 
+    !['technology', 'real-estate'].includes(cat.slug)
+  );
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -85,7 +90,7 @@ const Navigation = () => {
                 </Link>
                 
                 <AnimatePresence>
-                  {isCategoriesOpen && categories && categories.length > 0 && (
+                  {isCategoriesOpen && dropdownCategories && dropdownCategories.length > 0 && (
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -100,7 +105,7 @@ const Navigation = () => {
                         All Reports
                       </Link>
                       <div className="h-px bg-border/50 my-1" />
-                      {categories.map((category) => (
+                      {dropdownCategories.map((category) => (
                         <Link
                           key={category.id}
                           to={`/reports?category=${category.slug}`}
