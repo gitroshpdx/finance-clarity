@@ -132,6 +132,13 @@ const Navigation = () => {
               >
                 Contact
               </Link>
+
+              <Link
+                to="/disclaimer"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Disclaimer
+              </Link>
               
               {/* Theme Toggle */}
               <ThemeToggle />
@@ -233,6 +240,14 @@ const Navigation = () => {
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Contact
+                </Link>
+
+                <Link
+                  to="/disclaimer"
+                  className="text-lg font-medium hover:text-primary transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Disclaimer
                 </Link>
                 
                 {/* Mobile Theme Toggle */}
