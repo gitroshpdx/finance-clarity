@@ -3,92 +3,536 @@
   <!-- Static Pages -->
   <url>
     <loc>https://macrofinancereport.com/</loc>
-    <lastmod>2026-01-27</lastmod>
+    <lastmod>2026-02-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://macrofinancereport.com/reports</loc>
-    <lastmod>2026-01-27</lastmod>
+    <lastmod>2026-02-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://macrofinancereport.com/about</loc>
-    <lastmod>2026-01-27</lastmod>
+    <lastmod>2026-02-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://macrofinancereport.com/contact</loc>
-    <lastmod>2026-01-27</lastmod>
+    <lastmod>2026-02-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://macrofinancereport.com/disclaimer</loc>
-    <lastmod>2026-01-27</lastmod>
+    <lastmod>2026-02-04</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://macrofinancereport.com/privacy</loc>
-    <lastmod>2026-01-27</lastmod>
+    <lastmod>2026-02-04</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://macrofinancereport.com/terms</loc>
-    <lastmod>2026-01-27</lastmod>
+    <lastmod>2026-02-04</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
 
-  <!-- Category Pages -->
+  <!-- Category Pages (9 categories) -->
   <url>
     <loc>https://macrofinancereport.com/reports?category=banking</loc>
-    <lastmod>2026-01-27</lastmod>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/reports?category=central-banks</loc>
+    <lastmod>2026-02-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://macrofinancereport.com/reports?category=commodities</loc>
-    <lastmod>2026-01-27</lastmod>
+    <lastmod>2026-02-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://macrofinancereport.com/reports?category=crypto</loc>
-    <lastmod>2026-01-27</lastmod>
+    <lastmod>2026-02-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://macrofinancereport.com/reports?category=economy</loc>
-    <lastmod>2026-01-27</lastmod>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/reports?category=geopolitics</loc>
+    <lastmod>2026-02-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://macrofinancereport.com/reports?category=markets</loc>
-    <lastmod>2026-01-27</lastmod>
+    <lastmod>2026-02-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://macrofinancereport.com/reports?category=real-estate</loc>
-    <lastmod>2026-01-27</lastmod>
+    <lastmod>2026-02-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://macrofinancereport.com/reports?category=technology</loc>
-    <lastmod>2026-01-27</lastmod>
+    <lastmod>2026-02-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- Report Pages (111 published reports) -->
+  <!-- Report Pages (183 published reports) -->
+  <url>
+    <loc>https://macrofinancereport.com/report/crypto-market-analysis-rebound-or-dead-cat-bounce-btc-hits-76k-amidst-macro-stress</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-super-euro-dilemma-ecb-faces-deflationary-risks-amid-currency-surge</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/global-economic-divergence-ai-booms-as-industrial-recovery-falters</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-geopolitical-shadow-economy-market-forces-vs-the-new-world-order</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/commodity-crash-2026-fed-policy-shift-and-geopolitical-thaw-spark-metals-rout</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-convergence-euro-area-credit-retrenchment-and-the-dawn-of-monetary-scarcity</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-resilient-frontier-assessing-the-3-3-global-growth-narrative-for-2026</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-normalization-wall-street-foresees-a-super-cycle-for-dealmaking-in-2026</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/fortress-zurich-ubs-signals-dominance-with-q4-earnings-surge-and-strategic-capital-return</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/commodity-recalibration-oil-slumps-on-diplomacy-as-gold-eyes-6000oz</loc>
+    <lastmod>2026-02-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/global-commodities-collapse-inside-the-warsh-shock-and-the-great-de-leveraging</loc>
+    <lastmod>2026-02-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-squeeze-why-homebuilder-profits-are-sinking-despite-rate-relief</loc>
+    <lastmod>2026-02-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/ethereums-brutal-stumble-and-the-path-to-a-300-btc-outperformance</loc>
+    <lastmod>2026-02-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/luxury-decoupling-why-the-10m-market-is-surging-amidst-a-housing-slump</loc>
+    <lastmod>2026-02-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/2026-us-economic-outlook-inflation-stalemate-and-the-warsh-fed-transition</loc>
+    <lastmod>2026-02-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/commodity-collapse-2026-why-oil-and-gold-are-plunging-simultaneously</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/markets-in-turmoil-silver-collapse-and-stalled-nvidia-deal-spark-global-rout</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-euros-disinflationary-rally-ecb-faces-policy-dilemma-amid-fed-pause</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/global-markets-2026-the-great-reset-in-gold-and-the-tariff-tantrum-liquidation</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-energy-realignment-us-india-venezuela-and-the-end-of-the-russian-discount</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-warsh-pivot-navigating-the-new-era-of-global-monetary-transition</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/economic-outlook-2026-navigating-the-fed-transition-and-trade-realignment</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-2026-realignment-eu-sanctions-iran-as-germany-pivots-to-china-case-study</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-software-reckoning-why-ai-fears-are-tanking-saas-valuations</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/2026-real-estate-outlook-rates-stabilize-as-buyers-reclaim-leverage</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-recalibration-central-banks-navigate-the-last-mile-of-inflation</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/crypto-markets-under-siege-assessing-the-83000-support-floor-amidst-macro-chaos</loc>
+    <lastmod>2026-02-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/macro-outlook-2026-the-warsh-pivot-and-the-precious-metals-capitulation</loc>
+    <lastmod>2026-02-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/commodities-super-cycle-2026-gold-breaches-5400-amid-global-unrest</loc>
+    <lastmod>2026-02-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-transatlantic-friction-how-the-feds-rate-hold-is-destabilizing-global-markets</loc>
+    <lastmod>2026-02-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/eurozone-resilience-vs-fed-regime-change-2026-global-economic-outlook</loc>
+    <lastmod>2026-02-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/big-techs-ai-capex-crisis-navigating-the-2026-software-hardware-divide</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-sovereign-lead-time-geopolitics-of-critical-minerals-and-energy-in-2026</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-warsh-pivot-why-gold-crumbled-as-the-feds-new-era-began</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-productivity-pivot-global-central-banking-and-the-ai-renaissance-2026</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/commodities-in-crisis-the-7-trillion-metals-wipeout-and-the-warsh-effect</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-120-dilemma-why-the-ecb-can-no-longer-ignore-the-euros-rise</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/2026-real-estate-outlook-mortgage-stability-vs-the-ultraluxury-explosion</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/big-techs-great-divergence-the-2026-ai-rally-faces-a-reality-check</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-new-multi-polar-realism-analyzing-the-india-eu-fta-and-the-global-energy-pivot</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/perfect-storm-bitcoin-braces-for-us-shutdown-amid-18b-leverage-unwind</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-geopolitics-of-volatility-mapping-the-collision-of-national-security-and-global-markets</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-new-silk-circuit-securing-rare-earths-and-naval-primacy-in-a-fractured-hegemony</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-geopolitical-fracture-navigating-the-new-map-of-global-trade-and-energy-risks</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-pre-budget-retrenchment-navigating-volatility-in-indian-equities-and-bullion</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-democratization-dilemma-balancing-retail-access-and-regulatory-burden-in-private-markets</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-decoupling-s-p-7-000-and-the-1-5-trillion-spacex-frontier</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-geopolitical-pivot-bafin-s-warning-and-the-fragility-of-dollar-hegemony</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-rotation-em-outperformance-in-a-post-peak-dollar-regime</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-geopolitical-premium-brent-crude-surges-amidst-iranian-escalation-as-safe-haven-metals-retrace</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-resilient-frontier-navigating-the-imf-s-upward-revision-amidst-structural-friction</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-recalibration-bond-vigilantes-federal-reserve-leadership-and-the-new-inflationary-paradigm</loc>
+    <lastmod>2026-01-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/equilibrium-on-the-precipice-equity-markets-navigate-the-fed-s-strategic-pause</loc>
+    <lastmod>2026-01-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-euro-s-ascent-balancing-price-stability-and-competitive-paradigms</loc>
+    <lastmod>2026-01-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-independence-mandate-fed-holds-firm-against-political-tailwinds</loc>
+    <lastmod>2026-01-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-efficiency-frontier-private-capital-and-artificial-intelligence-as-the-new-pillars-of-global-growth</loc>
+    <lastmod>2026-01-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-bohemian-divergence-czechia-s-monetary-path-and-the-emerging-central-european-rift</loc>
+    <lastmod>2026-01-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-golden-renaissance-navigating-the-5-300-frontier</loc>
+    <lastmod>2026-01-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-devaluation-analyzing-the-structural-shift-in-the-us-dollar-s-dominance</loc>
+    <lastmod>2026-01-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-ascent-s-p-500-at-7-000-and-the-anatomy-of-the-ai-supercycle</loc>
+    <lastmod>2026-01-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-neutral-pivot-navigating-the-fed-s-strategic-pause-amidst-persistent-inflation</loc>
+    <lastmod>2026-01-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-divergence-navigating-the-global-fixed-income-pivot</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-alpine-fortress-swiss-franc-primacy-in-an-age-of-geopolitical-fracturing</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-500-billion-erosion-stablecoins-and-the-existential-threat-to-legacy-deposit-bases</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-convergence-jgb-volatility-and-the-global-sovereign-debt-re-rating</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-shadow-loom-addressing-systemic-fragility-in-non-bank-financial-intermediation-nbfi</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-decoupling-2-0-china-s-1-2-trillion-pivot-and-the-new-global-trade-architecture</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-swiss-pivot-ubs-and-the-institutionalization-of-digital-asset-wealth-management</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-convergence-frontier-bitgo-s-post-ipo-tokenization-and-the-synthetic-liquidity-revolution</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-institutional-pivot-laser-digital-s-occ-charter-application-and-the-new-frontier-of-regulated-custody</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-consolidation-makarora-management-s-2-1b-acquisition-of-plymouth-industrial-reit</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/bitcoin-stalls-near-88k-as-silver-futures-rival-crypto-liquidity-on-dexs</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
     <loc>https://macrofinancereport.com/report/the-great-recalibration-institutional-real-estate-capital-markets-through-2026</loc>
     <lastmod>2026-01-27</lastmod>
@@ -354,6 +798,66 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://macrofinancereport.com/report/davos-day-2-the-great-divide-geopolitics-tariffs-and-the-ai-arms-race</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-global-reawakening-davos-2026-and-the-architecture-of-resilience</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-deceleration-fitch-rates-inflation-persistence-and-the-tariff-variable</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-deceleration-jpmorgan-s-2026-growth-reset-and-the-risk-of-reflation</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-liquidity-debate-crypto-faces-its-black-hole-or-its-next-supercycle</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-decompression-crypto-beta-and-the-institutional-arbitrage-window</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-rebalancing-bitcoin-correlation-alpha-and-the-new-role-of-gold</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-liquidity-taper-gold-and-bitcoin-recouple-as-global-yield-environment-shifts</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-silicon-squeeze-the-strategic-endgame-for-nvidia-under-trump-2-0</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-divergence-analyzing-the-structural-repricing-of-global-risk</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://macrofinancereport.com/report/davos-day-2-the-great-rebalancing-economic-leaders-weigh-pro-growth-strategies-against-fiscal-gravity</loc>
     <lastmod>2026-01-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -414,6 +918,54 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://macrofinancereport.com/report/bitcoin-and-gold-recouple-as-100-000-btc-fails-and-5-000-gold-looms</loc>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-fracture-analyzing-the-tariff-fueled-supply-chain-realignment-of-2026</loc>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-repricing-navigating-the-synchronized-rally-in-gold-and-cryptoassets</loc>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-recalibration-trump-2-0-and-the-future-of-crypto-custody</loc>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/bitcoin-s-100-000-moment-what-the-data-is-telling-us</loc>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-repricing-markets-embrace-policy-uncertainty-as-trump-2-0-begins</loc>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/trumps-tariff-tightrope-analyzing-the-impact-of-selective-protectionism</loc>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-inauguration-trade-analyzing-market-implications-of-trump-2-0</loc>
+    <lastmod>2026-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://macrofinancereport.com/report/the-great-displacement-assessing-gen-z-s-cognitive-vulnerability-to-the-generative-ai-revolution</loc>
     <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -444,314 +996,146 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://macrofinancereport.com/report/the-reversal-of-euphoria-xrp-breaches-2-support-as-leveraged-longs-face-29-7m-liquidation</loc>
-    <lastmod>2026-01-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/regulatory-hardening-assessing-the-impact-of-rbi-s-mandatory-auditor-certification-on-priority-sector-lending</loc>
-    <lastmod>2026-01-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/the-digital-imperative-analyzing-lloyds-banking-group-s-strategic-pivot-and-the-erosion-of-the-high-street</loc>
-    <lastmod>2026-01-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/the-silent-ledger-systemic-implications-of-the-mlk-day-banking-moratorium</loc>
-    <lastmod>2026-01-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/the-resupply-paradox-uk-housing-inventory-hits-8-year-high-amidst-interest-rate-fragility</loc>
-    <lastmod>2026-01-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/the-houston-pivot-supply-surges-and-the-shift-toward-a-buyer-centric-2026-market</loc>
-    <lastmod>2026-01-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/the-consolidation-tsunami-navigating-the-compass-anywhere-mega-merger</loc>
-    <lastmod>2026-01-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/digital-gold-vs-geopolitical-friction-assessing-the-crypto-liquidation-in-the-wake-of-trade-escalation</loc>
-    <lastmod>2026-01-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/digital-deleveraging-inside-the-680m-liquidation-cascade</loc>
-    <lastmod>2026-01-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/the-great-de-leveraging-macro-headwinds-and-liquidity-voids-trigger-crypto-major-sell-off</loc>
-    <lastmod>2026-01-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/capital-discipline-vs-growth-narratives-the-new-earnings-divide</loc>
-    <lastmod>2026-01-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/index-concentration-risk-when-passive-investing-becomes-a-macro-threat</loc>
-    <lastmod>2026-01-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/liquidity-without-stimulus-the-quiet-tools-central-banks-still-control</loc>
-    <lastmod>2026-01-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/the-architecture-of-evasion-sanctions-arbitrage-and-the-rise-of-shadow-capital-flows</loc>
-    <lastmod>2026-01-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/the-great-divergence-navigating-emerging-market-debt-fragility-in-a-high-rate-era</loc>
-    <lastmod>2026-01-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/the-silver-squeeze-2-0-assessing-the-fundamental-deficit-and-industrial-super-cycle</loc>
+    <loc>https://macrofinancereport.com/report/the-great-melt-up-record-highs-on-the-eve-of-regime-change</loc>
     <lastmod>2026-01-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://macrofinancereport.com/report/the-callous-rally-decoding-high-stakes-geopolitics-and-the-5000-gold-path</loc>
+    <loc>https://macrofinancereport.com/report/the-great-repricing-why-bitcoin-and-gold-are-converging-on-the-liquidity-trade</loc>
     <lastmod>2026-01-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://macrofinancereport.com/report/commodity-cycles-in-a-fragmented-world-energy-rare-earths-and-resilience-finance</loc>
-    <lastmod>2026-01-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/the-great-divergence-commodity-supercycles-and-the-new-geography-of-global-growth</loc>
-    <lastmod>2026-01-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/multipolar-markets-the-new-geoeconomic-order-and-currency-realignments</loc>
-    <lastmod>2026-01-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/economic-conflicts-ranked-1-global-risk-implications-for-markets-policy</loc>
-    <lastmod>2026-01-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/fiscal-noise-and-market-volatility-how-government-policy-is-steering-2026</loc>
-    <lastmod>2026-01-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/the-resurgence-of-giants-global-m-a-and-the-new-era-of-consolidation</loc>
-    <lastmod>2026-01-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/the-silicon-mirage-calculus-for-the-ai-bubble-top-and-sophisticated-hedging-frameworks</loc>
-    <lastmod>2026-01-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/2026-market-outlook-navigating-the-great-normalization-and-the-productivity-frontier</loc>
-    <lastmod>2026-01-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/the-ai-fueled-bond-boom-how-corporate-debt-markets-are-transforming-in-2026</loc>
-    <lastmod>2026-01-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/the-new-gilded-era-why-central-banks-are-repudiating-the-dollar-hegemony</loc>
-    <lastmod>2026-01-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/global-macro-outlook-2026-the-collision-of-executive-easing-and-fed-independence</loc>
-    <lastmod>2026-01-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/global-macro-outlook-2026-central-bank-friction-meets-growth-resilience</loc>
-    <lastmod>2026-01-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/the-feds-neutral-game-inflation-goals-vs-political-instability-in-2026-mkji9vz0</loc>
-    <lastmod>2026-01-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/global-markets-analysis-2026-tech-fatigue-and-the-rise-of-policy-driven-volatili-mkji6mkp</loc>
-    <lastmod>2026-01-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/the-greenback-fortress-analyzing-the-usds-surge-amidst-global-tariff-risks-mkjhnoit</loc>
-    <lastmod>2026-01-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/2021-2026-shift-how-infrastructure-focused-capital-and-regulatory-walls-are-shap-mkjhh4lt</loc>
-    <lastmod>2026-01-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/markets-2026-outlook-wall-street-consolidates-amid-ai-boom-and-policy-shifts-mkjgvnee</loc>
-    <lastmod>2026-01-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://macrofinancereport.com/report/navigating-the-quantitative-finance-career-path-a-learner-s-guide</loc>
+    <loc>https://macrofinancereport.com/report/the-great-rotation-assessing-the-rally-in-crypto-gold-and-risk-assets</loc>
     <lastmod>2026-01-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://macrofinancereport.com/report/india-q3-fy26-briefing-banking-stability-industrial-expansion-and-regulatory-shifts</loc>
+    <loc>https://macrofinancereport.com/report/the-trump-2-0-trade-dissecting-the-market-rally-ahead-of-inauguration</loc>
     <lastmod>2026-01-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://macrofinancereport.com/report/the-journey-of-a-derivative-a-post-trade-operational-guide</loc>
+    <loc>https://macrofinancereport.com/report/the-great-reopening-trade-will-trumps-tariff-threats-spur-a-manufacturing-renaissance</loc>
     <lastmod>2026-01-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://macrofinancereport.com/report/decoding-the-math-of-risk-the-impact-of-the-journal-of-derivatives-on-modern-finance</loc>
+    <loc>https://macrofinancereport.com/report/gold-s-5-000-question-central-bank-demand-and-the-great-reallocation</loc>
     <lastmod>2026-01-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://macrofinancereport.com/report/beyond-the-crystal-ball-how-monte-carlo-simulations-map-the-chaos-of-modern-finance</loc>
+    <loc>https://macrofinancereport.com/report/gold-breaks-5-000-as-the-great-rotation-accelerates</loc>
     <lastmod>2026-01-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://macrofinancereport.com/report/the-gatekeepers-of-capital-5-insights-from-leading-finance-journals</loc>
-    <lastmod>2026-01-17</lastmod>
+    <loc>https://macrofinancereport.com/report/decoding-the-cpi-goldilocks-and-the-path-to-100-000-bitcoin</loc>
+    <lastmod>2026-01-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://macrofinancereport.com/report/fundamental-vs-technical-5-essential-truths-from-top-market-experts</loc>
-    <lastmod>2026-01-17</lastmod>
+    <loc>https://macrofinancereport.com/report/the-soft-landing-illusion-why-the-feds-job-isnt-done</loc>
+    <lastmod>2026-01-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://macrofinancereport.com/report/a-reality-check-from-davos-4-economic-shifts-top-economists-are-warning-about</loc>
-    <lastmod>2026-01-17</lastmod>
+    <loc>https://macrofinancereport.com/report/bitcoin-nears-100-000-again-as-cpi-data-sparks-a-risk-on-rally</loc>
+    <lastmod>2026-01-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://macrofinancereport.com/report/shadow-risks-why-the-real-oil-crisis-is-hidden-beneath-the-surface</loc>
-    <lastmod>2026-01-17</lastmod>
+    <loc>https://macrofinancereport.com/report/cpi-breakdown-the-great-inflation-debate-continues</loc>
+    <lastmod>2026-01-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://macrofinancereport.com/report/beyond-the-noise-5-hidden-market-truths-for-long-term-investors</loc>
-    <lastmod>2026-01-17</lastmod>
+    <loc>https://macrofinancereport.com/report/bitcoin-eyes-100-000-as-macro-headwinds-intensify</loc>
+    <lastmod>2026-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://macrofinancereport.com/report/the-ai-funding-overhang-strategic-pivots-for-the-2026-investment-landscape</loc>
-    <lastmod>2026-01-17</lastmod>
+    <loc>https://macrofinancereport.com/report/bond-vigilantes-are-back-whats-next-for-treasuries</loc>
+    <lastmod>2026-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://macrofinancereport.com/report/beyond-the-hype-5-surprising-market-predictions-from-top-experts</loc>
-    <lastmod>2026-01-17</lastmod>
+    <loc>https://macrofinancereport.com/report/gold-breaks-out-the-geopolitical-and-monetary-forces-at-play</loc>
+    <lastmod>2026-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://macrofinancereport.com/report/india-s-tax-paradox-why-administrative-uncertainty-trumps-competitive-rates-for-global-investors</loc>
-    <lastmod>2026-01-17</lastmod>
+    <loc>https://macrofinancereport.com/report/wall-streets-2026-outlook-cautious-optimism-or-complacency</loc>
+    <lastmod>2026-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://macrofinancereport.com/report/the-balancing-act-navigating-fiscal-math-and-national-growth-strategies</loc>
-    <lastmod>2026-01-17</lastmod>
+    <loc>https://macrofinancereport.com/report/q4-earnings-preview-bank-stocks-set-the-tone-for-2026</loc>
+    <lastmod>2026-01-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://macrofinancereport.com/report/the-institutional-ascent-of-au-small-finance-bank-a-blueprint-for-strategic-partnerships-and-discipline</loc>
-    <lastmod>2026-01-17</lastmod>
+    <loc>https://macrofinancereport.com/report/the-great-crypto-rotation-flows-favor-altcoins-as-bitcoin-stalls</loc>
+    <lastmod>2026-01-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://macrofinancereport.com/report/market-volatility-and-metal-surges-analyzing-the-impact-of-us-tariffs-and-sector-rotation</loc>
-    <lastmod>2026-01-17</lastmod>
+    <loc>https://macrofinancereport.com/report/chinas-stimulus-crossroads-can-the-dragon-reflate</loc>
+    <lastmod>2026-01-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://macrofinancereport.com/report/fixed-income-strategy-2026-navigating-the-long-pause-and-the-shift-to-accrual</loc>
-    <lastmod>2026-01-17</lastmod>
+    <loc>https://macrofinancereport.com/report/oil-surges-on-russia-sanctions-what-it-means-for-markets</loc>
+    <lastmod>2026-01-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://macrofinancereport.com/report/the-indian-macro-loop-why-domestic-buying-is-pressuring-the-rupee-and-shifting-equity-strategies</loc>
-    <lastmod>2026-01-17</lastmod>
+    <loc>https://macrofinancereport.com/report/trumps-tariff-gambit-what-it-means-for-global-markets</loc>
+    <lastmod>2026-01-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/fed-minutes-reveal-hawkish-shift-rate-cut-hopes-fade</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/the-great-bond-sell-off-why-yields-are-surging-globally</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/bitcoin-slips-below-92000-is-the-bull-market-stalling</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://macrofinancereport.com/report/gold-vs-bitcoin-divergence-deepens-as-macro-storm-brews</loc>
+    <lastmod>2026-01-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
