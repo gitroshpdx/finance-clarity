@@ -1,99 +1,55 @@
 
+# Update Static Sitemap to 287 Reports
 
-# Add Disclaimer Link to Footer and Navigation
+## Current vs Required
 
-## Summary
-
-Add a "Disclaimer" link to both the site navigation and footer to make the existing Disclaimer page accessible from anywhere on the site.
+| Content Type | Current Sitemap | Database | Difference |
+|--------------|-----------------|----------|------------|
+| Published Reports | 183 | **287** | +104 missing |
+| Categories | 9 | 9 | No change |
+| Last Updated | Feb 4, 2026 | **Feb 17, 2026** | Outdated |
 
 ---
 
-## Changes Required
+## What I'll Do
 
-### 1. Footer Component (`src/components/Footer.tsx`)
+### Update `public/sitemap.xml`
 
-Add the Disclaimer link to the **Legal** section alongside Privacy Policy and Terms of Service.
+Regenerate the complete static sitemap with:
+- **7 static pages** (unchanged)
+- **9 category pages** (unchanged)
+- **287 report pages** with accurate lastmod dates from the database
 
-**Current Legal section:**
-- Privacy Policy
-- Terms of Service
+### New Reports to Add (104 articles from Feb 5 - Feb 17)
 
-**Updated Legal section:**
-- Privacy Policy
-- Terms of Service
-- **Disclaimer** (new)
+Sample of the newest reports:
 
-### 2. Navigation Component (`src/components/Navigation.tsx`)
-
-Add the Disclaimer link to both desktop and mobile navigation menus.
-
-**Desktop Navigation** (between Contact and Theme Toggle):
-- Reports
-- About
-- Contact
-- **Disclaimer** (new)
-- Theme Toggle
-
-**Mobile Navigation** (after Contact):
-- Reports
-- About
-- Contact
-- **Disclaimer** (new)
-- Theme Toggle
-- Subscribe button
+| Date | Report |
+|------|--------|
+| Feb 17 | the-great-pivot-ecb-challenges-dollar-dominance-amid-fed-independence-concerns |
+| Feb 17 | the-affluence-fracture-us-home-sales-crater-as-high-earners-hit-a-debt-wall |
+| Feb 17 | the-great-ai-bifurcation-navigating-the-markets-new-winners-and-losers |
+| Feb 16 | k-shaped-credit-the-divergent-reality-of-the-2026-us-housing-market |
+| Feb 16 | the-1-trillion-ai-revaluation-why-markets-are-turning-on-tech-giants-in-2026 |
+| Feb 15 | bitcoin-reclaims-70000-analyzing-the-87-billion-capitulation-and-the-shift-in-global-liquidity |
+| Feb 12 | geopolitical-tightening-the-2026-energy-squeeze-and-the-peak-oil-revision |
+| ... | *(and 97 more from Feb 5 - Feb 12)* |
 
 ---
 
 ## Technical Details
 
-### Footer Changes (Lines 61-68)
+### File: `public/sitemap.xml`
 
-Add a new Link component for Disclaimer in the Legal nav section:
-
-```tsx
-<Link to="/disclaimer" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-  Disclaimer
-</Link>
-```
-
-### Navigation Changes
-
-**Desktop (after line 134):**
-```tsx
-<Link
-  to="/disclaimer"
-  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
->
-  Disclaimer
-</Link>
-```
-
-**Mobile (after line 236):**
-```tsx
-<Link
-  to="/disclaimer"
-  className="text-lg font-medium hover:text-primary transition-colors"
-  onClick={() => setIsMobileMenuOpen(false)}
->
-  Disclaimer
-</Link>
-```
-
----
-
-## Files to Modify
-
-| File | Change |
-|------|--------|
-| `src/components/Footer.tsx` | Add Disclaimer link to Legal section |
-| `src/components/Navigation.tsx` | Add Disclaimer link to desktop and mobile menus |
+Complete rewrite with all 303 URLs (7 static + 9 categories + 287 reports), each with accurate `lastmod` dates pulled from the database.
 
 ---
 
 ## Result
 
-The Disclaimer page (`/disclaimer`) will be accessible from:
-- Desktop navigation bar
-- Mobile navigation menu
-- Footer Legal section
-
+| Metric | Before | After |
+|--------|--------|-------|
+| Total URLs | 199 | **303** |
+| Reports indexed | 183 | **287** |
+| Categories | 9 | 9 |
+| Latest date | Feb 4, 2026 | **Feb 17, 2026** |
