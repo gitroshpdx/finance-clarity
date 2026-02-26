@@ -49,14 +49,49 @@ export default function AdminDashboard() {
   const [transforming, setTransforming] = useState(false);
   const { isSuperAdmin } = useSuperAdmin();
   const [sitemapCopied, setSitemapCopied] = useState(false);
+  const [generatingSitemap, setGeneratingSitemap] = useState(false);
 
-  const sitemapUrl = `https://cqivqqhshxetmecpzcsr.supabase.co/functions/v1/sitemap-txt`;
+  const sitemapUrl = 'https://macrofinancereport.com/sitemap.txt';
 
   const handleCopySitemap = () => {
     navigator.clipboard.writeText(sitemapUrl);
     setSitemapCopied(true);
     toast.success('Sitemap URL copied to clipboard!');
     setTimeout(() => setSitemapCopied(false), 2000);
+  };
+
+  const handleGenerateSitemap = async () => {
+    setGeneratingSitemap(true);
+    toast.info('Generating fresh sitemap...');
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/sitemap-txt`,
+        {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+          },
+        }
+      );
+      if (!response.ok) throw new Error('Failed to generate sitemap');
+      const text = await response.text();
+      const blob = new Blob([text], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'sitemap.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      const urlCount = text.split('\n').filter(Boolean).length;
+      toast.success(`Sitemap downloaded with ${urlCount} URLs! Replace public/sitemap.txt with this file.`);
+    } catch (error) {
+      console.error('Sitemap generation error:', error);
+      toast.error('Failed to generate sitemap.');
+    } finally {
+      setGeneratingSitemap(false);
+    }
   };
   const handleTransformArticles = async () => {
     setTransforming(true);
@@ -161,11 +196,11 @@ export default function AdminDashboard() {
               Sitemap for Google Search Console
             </CardTitle>
             <CardDescription className="mt-1">
-              Paste this URL in Google Search Console under Sitemaps
+              Generate a fresh sitemap and submit the URL below to Google Search Console
             </CardDescription>
           </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="space-y-3">
           <div className="flex items-center gap-2">
             <code className="flex-1 text-xs bg-muted px-3 py-2 rounded-md truncate">
               {sitemapUrl}
@@ -176,9 +211,20 @@ export default function AdminDashboard() {
               ) : (
                 <Copy className="h-4 w-4" />
               )}
-              {sitemapCopied ? 'Copied' : 'Copy'}
+              {sitemapCopied ? 'Copied' : 'Copy URL'}
             </Button>
           </div>
+          <Button onClick={handleGenerateSitemap} disabled={generatingSitemap} variant="secondary" size="sm">
+            {generatingSitemap ? (
+              <Loader2 className="h-4 w-4 animate-spin mr-2" />
+            ) : (
+              <Globe className="h-4 w-4 mr-2" />
+            )}
+            Generate &amp; Download Fresh Sitemap
+          </Button>
+          <p className="text-xs text-muted-foreground">
+            After downloading, replace <code className="bg-muted px-1 rounded">public/sitemap.txt</code> with the downloaded file and redeploy.
+          </p>
         </CardContent>
       </Card>
       {/* Stats Grid */}
