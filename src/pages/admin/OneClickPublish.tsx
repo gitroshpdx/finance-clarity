@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
+import { useAuth } from '@/contexts/AuthContext';
+import { logAutoPublishUsage } from '@/hooks/useAutoPublishUsage';
 import {
   Zap,
   TrendingUp,
@@ -75,6 +77,7 @@ const categories = [
 ];
 
 export default function OneClickPublish() {
+  const { user } = useAuth();
   const [generatingCategory, setGeneratingCategory] = useState<string | null>(null);
   const [publishedArticles, setPublishedArticles] = useState<PublishedArticle[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -172,6 +175,7 @@ export default function OneClickPublish() {
         throw new Error(data.error || 'Failed to publish article');
       }
 
+      if (user) await logAutoPublishUsage(user.id, 'one_click_publish', data.article.id);
       setPublishedArticles((prev) => [data.article, ...prev]);
       setIsPreviewOpen(false);
       setPreviewData(null);
