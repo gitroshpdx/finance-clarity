@@ -1,55 +1,56 @@
 
-# Update Static Sitemap to 287 Reports
 
-## Current vs Required
+# Grant Super Admin Role to Rishab and Adarsh
 
-| Content Type | Current Sitemap | Database | Difference |
-|--------------|-----------------|----------|------------|
-| Published Reports | 183 | **287** | +104 missing |
-| Categories | 9 | 9 | No change |
-| Last Updated | Feb 4, 2026 | **Feb 17, 2026** | Outdated |
+## Summary
 
----
+Insert `super_admin` role entries for the two regular admin users so they can access the Auto-Publish and One-Click Publish features.
 
-## What I'll Do
+## Changes
 
-### Update `public/sitemap.xml`
+### Database: Insert super_admin roles
 
-Regenerate the complete static sitemap with:
-- **7 static pages** (unchanged)
-- **9 category pages** (unchanged)
-- **287 report pages** with accurate lastmod dates from the database
+Using the data insert tool, add two rows to `user_roles`:
 
-### New Reports to Add (104 articles from Feb 5 - Feb 17)
+```sql
+INSERT INTO public.user_roles (user_id, role)
+SELECT id, 'super_admin'
+FROM auth.users
+WHERE email IN ('rishabyadav9758@gmail.com', 'thakuradarshchauhan3012@gmail.com')
+ON CONFLICT (user_id, role) DO NOTHING;
+```
 
-Sample of the newest reports:
+### Update `assign_admin_role()` trigger function
 
-| Date | Report |
-|------|--------|
-| Feb 17 | the-great-pivot-ecb-challenges-dollar-dominance-amid-fed-independence-concerns |
-| Feb 17 | the-affluence-fracture-us-home-sales-crater-as-high-earners-hit-a-debt-wall |
-| Feb 17 | the-great-ai-bifurcation-navigating-the-markets-new-winners-and-losers |
-| Feb 16 | k-shaped-credit-the-divergent-reality-of-the-2026-us-housing-market |
-| Feb 16 | the-1-trillion-ai-revaluation-why-markets-are-turning-on-tech-giants-in-2026 |
-| Feb 15 | bitcoin-reclaims-70000-analyzing-the-87-billion-capitulation-and-the-shift-in-global-liquidity |
-| Feb 12 | geopolitical-tightening-the-2026-energy-squeeze-and-the-peak-oil-revision |
-| ... | *(and 97 more from Feb 5 - Feb 12)* |
+Update the database function so future sign-ups by these emails also get `super_admin` automatically:
 
----
+```sql
+CREATE OR REPLACE FUNCTION public.assign_admin_role()
+RETURNS trigger
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = 'public'
+AS $$
+BEGIN
+  IF NEW.email IN (
+    'work.roshansingh0@gmail.com',
+    'rishabyadav9758@gmail.com',
+    'thakuradarshchauhan3012@gmail.com'
+  ) THEN
+    INSERT INTO public.user_roles (user_id, role)
+    VALUES (NEW.id, 'admin')
+    ON CONFLICT (user_id, role) DO NOTHING;
 
-## Technical Details
-
-### File: `public/sitemap.xml`
-
-Complete rewrite with all 303 URLs (7 static + 9 categories + 287 reports), each with accurate `lastmod` dates pulled from the database.
-
----
+    INSERT INTO public.user_roles (user_id, role)
+    VALUES (NEW.id, 'super_admin')
+    ON CONFLICT (user_id, role) DO NOTHING;
+  END IF;
+  RETURN NEW;
+END;
+$$;
+```
 
 ## Result
 
-| Metric | Before | After |
-|--------|--------|-------|
-| Total URLs | 199 | **303** |
-| Reports indexed | 183 | **287** |
-| Categories | 9 | 9 |
-| Latest date | Feb 4, 2026 | **Feb 17, 2026** |
+All three admin users will have both `admin` and `super_admin` roles, giving them full access to Auto-Publish and One-Click Publish features. No frontend code changes needed.
+
