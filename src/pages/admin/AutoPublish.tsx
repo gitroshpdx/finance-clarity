@@ -22,6 +22,8 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
+import { logAutoPublishUsage } from '@/hooks/useAutoPublishUsage';
 
 interface MarketContext {
   indices: string;
@@ -58,6 +60,7 @@ const REGION_OPTIONS = [
 ];
 
 export default function AutoPublish() {
+  const { user } = useAuth();
   const [rawNewsData, setRawNewsData] = useState('');
   const [publishDate, setPublishDate] = useState(new Date().toISOString().split('T')[0]);
   const [regionTags, setRegionTags] = useState<string[]>(['Global']);
@@ -127,6 +130,7 @@ export default function AutoPublish() {
       setResult(data);
 
       if (data.published) {
+        if (user) await logAutoPublishUsage(user.id, 'auto_publish', data.report_id);
         toast.success('Article generated and published successfully!');
       } else {
         toast.success('Article generated successfully! Review below.');
@@ -175,6 +179,7 @@ export default function AutoPublish() {
 
       const data: AutoPublishResult = await response.json();
       setResult(data);
+      if (user) await logAutoPublishUsage(user.id, 'auto_publish', data.report_id);
       toast.success('Article published successfully!');
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Unknown error';

@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { useSuperAdmin } from '@/hooks/useSuperAdmin';
+import { OutstandingBalanceCard } from '@/components/admin/OutstandingBalanceCard';
 import { 
   FileText, 
   TrendingUp, 
@@ -135,6 +136,9 @@ export default function AdminDashboard() {
           Welcome to the MacroFinance Report admin panel.
         </p>
       </div>
+
+      {/* Outstanding Balance */}
+      {isSuperAdmin && <OutstandingBalanceCard />}
 
       {/* Stats Grid */}
       <div className="grid gap-4 md:grid-cols-3">

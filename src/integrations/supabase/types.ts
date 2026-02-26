@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      auto_publish_usage: {
+        Row: {
+          cost_amount: number
+          created_at: string
+          feature_used: string
+          id: string
+          report_id: string | null
+          user_id: string
+        }
+        Insert: {
+          cost_amount?: number
+          created_at?: string
+          feature_used?: string
+          id?: string
+          report_id?: string | null
+          user_id: string
+        }
+        Update: {
+          cost_amount?: number
+          created_at?: string
+          feature_used?: string
+          id?: string
+          report_id?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       categories: {
         Row: {
           created_at: string
