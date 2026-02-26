@@ -17,3 +17,6 @@ verify_jwt = false
 
 [functions.one-click-publish]
 verify_jwt = false
+
+[functions.sitemap-txt]
+verify_jwt = false

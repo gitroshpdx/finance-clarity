@@ -16,7 +16,10 @@ import {
   ArrowRight,
   Loader2,
   Wand2,
-  Zap
+  Zap,
+  Globe,
+  Copy,
+  Check
 } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { toast } from 'sonner';
@@ -45,7 +48,16 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [transforming, setTransforming] = useState(false);
   const { isSuperAdmin } = useSuperAdmin();
+  const [sitemapCopied, setSitemapCopied] = useState(false);
 
+  const sitemapUrl = `https://cqivqqhshxetmecpzcsr.supabase.co/functions/v1/sitemap-txt`;
+
+  const handleCopySitemap = () => {
+    navigator.clipboard.writeText(sitemapUrl);
+    setSitemapCopied(true);
+    toast.success('Sitemap URL copied to clipboard!');
+    setTimeout(() => setSitemapCopied(false), 2000);
+  };
   const handleTransformArticles = async () => {
     setTransforming(true);
     toast.info('Transforming articles to premium format...', { duration: 10000 });
@@ -140,6 +152,35 @@ export default function AdminDashboard() {
       {/* Outstanding Balance */}
       {isSuperAdmin && <OutstandingBalanceCard />}
 
+      {/* Sitemap for Google Search Console */}
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between pb-2">
+          <div>
+            <CardTitle className="flex items-center gap-2 text-base">
+              <Globe className="h-5 w-5 text-primary" />
+              Sitemap for Google Search Console
+            </CardTitle>
+            <CardDescription className="mt-1">
+              Paste this URL in Google Search Console under Sitemaps
+            </CardDescription>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <div className="flex items-center gap-2">
+            <code className="flex-1 text-xs bg-muted px-3 py-2 rounded-md truncate">
+              {sitemapUrl}
+            </code>
+            <Button variant="outline" size="sm" onClick={handleCopySitemap}>
+              {sitemapCopied ? (
+                <Check className="h-4 w-4 text-primary" />
+              ) : (
+                <Copy className="h-4 w-4" />
+              )}
+              {sitemapCopied ? 'Copied' : 'Copy'}
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
       {/* Stats Grid */}
       <div className="grid gap-4 md:grid-cols-3">
         <Card>
